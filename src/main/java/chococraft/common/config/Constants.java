@@ -23,9 +23,6 @@ public class Constants
 	// resource folder
 	public static String CHOCOBO_RESOURCES_FOLDER = "textures/entities/";
 	
-	// sound folder
-	public static String CHOCOBO_SOUND_FOLDER = CHOCOBO_RESOURCES_FOLDER + "sound/";
-	
 	// armour folder
 	public static String CHOCOBO_ARMOUR_FOLDER = "chococraft:textures/armor";
 
