@@ -16,7 +16,9 @@ public class ChocoboSetupUpdate implements IMessage {//TODO - is this even neede
 	public boolean hungerEnabled;
 
 	public ChocoboSetupUpdate() {
-		this.dedicatedServer = MinecraftServer.getServer().isDedicatedServer();
+		this.dedicatedServer = false;
+		if(MinecraftServer.getServer() != null)
+			this.dedicatedServer = MinecraftServer.getServer().isDedicatedServer();
 		this.hungerEnabled = ModChocoCraft.hungerEnabled;
 	}
 
