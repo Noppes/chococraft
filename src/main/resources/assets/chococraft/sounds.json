@@ -1,3 +1,4 @@
 {
-"choco_kweh": {"category": "ambient", "sounds": [{"name": "choco_kweh","stream": false}]}
+    "choco_kweh": {"category": "neutral", "sounds": [{"name": "choco_kweh","stream": false}]},
+    "chico_kweh": {"category": "neutral", "sounds": [{"name": "choco_kweh","stream": false, "pitch": 5}]}
 }

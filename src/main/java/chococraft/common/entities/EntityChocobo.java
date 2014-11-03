@@ -309,7 +309,7 @@ public abstract class EntityChocobo extends EntityChocoboRideable
 		}
 		else
 		{
-			return "";
+			return null;
 		}
 	}
 

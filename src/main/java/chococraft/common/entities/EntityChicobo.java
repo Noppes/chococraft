@@ -27,6 +27,7 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 
@@ -129,6 +130,12 @@ public class EntityChicobo extends EntityAnimalChocobo
 		this.setColor(chocoboColor.valueOf(nbttagcompound.getString("Color")));
 		this.setCanGrowUp(nbttagcompound.getBoolean("CanGrow"));
 		this.setWander(!this.isFollowing());
+	}
+
+	@Override
+	public ResourceLocation getResourceLocation()
+	{
+		return new ResourceLocation(Constants.TCC_MODID, this.getEntityTexture());
 	}
 
 	@Override
@@ -278,24 +285,24 @@ public class EntityChicobo extends EntityAnimalChocobo
 	{
 		if (rand.nextInt(2) == 0)
 		{
-			return "choco_kweh";
+			return "chococraft:chico_kweh";
 		}
 		else
 		{
-			return "";
+			return null;
 		}
 	}
 
 	@Override
 	protected String getHurtSound()
 	{
-		return "choco_kweh";
+		return "chococraft:chico_kweh";
 	}
 
 	@Override
 	protected String getDeathSound()
 	{
-		return "choco_kweh";
+		return "chococraft:chico_kweh";
 	}
 
 	@Override
@@ -350,11 +357,6 @@ public class EntityChicobo extends EntityAnimalChocobo
 		{
 			this.showAmountHeartsOrSmokeFx(false, 7);
 		}
-	}
-
-	protected int getDropItemId()
-	{
-		return -1;
 	}
 
 	@Override
