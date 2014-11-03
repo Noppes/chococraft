@@ -85,6 +85,11 @@ public class GuiChocopedia extends GuiScreen
 	}
 
 	@Override
+	public boolean doesGuiPauseGame() {
+		return false;
+	}
+
+	@Override
 	@SuppressWarnings("unchecked")
 	public void initGui()
 	{		

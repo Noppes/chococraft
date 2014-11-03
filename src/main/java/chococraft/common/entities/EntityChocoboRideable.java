@@ -370,7 +370,7 @@ public abstract class EntityChocoboRideable extends EntityAnimalChocobo
 	public void updateRiderPosition()
 	{
 		if (this.riddenByEntity != null)
-		{//TODO fix this so the player actually is ontop of the model..
+		{
 			double deltaPosX = MathHelper.cos((this.rotationYaw - 90) * (float)Math.PI / 180.0F) * 0.4F;
 			double deltaPosZ = MathHelper.sin((this.rotationYaw - 90) * (float)Math.PI / 180.0F) * 0.4F;
 			this.riddenByEntity.setPosition(this.posX + deltaPosX,

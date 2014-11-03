@@ -29,6 +29,7 @@ import chococraft.common.network.clientSide.*;
 import chococraft.common.network.serverSide.ChocoboAttribute;
 import chococraft.common.network.serverSide.ChocoboChangeOwner;
 import chococraft.common.network.serverSide.ChocoboSetInLove;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
@@ -107,7 +108,7 @@ public abstract class EntityAnimalChocobo extends EntityTameable implements IEnt
 		this.tasks.addTask(this.taskNumber++, new ChocoboAIWander(this, 0.25F));
 		this.tasks.addTask(this.taskNumber++, new ChocoboAIWatchClosest(this, EntityPlayer.class, 6F));
 		this.tasks.addTask(this.taskNumber++, new ChocoboAILookIdle(this));
-		this.tasks.addTask(this.taskNumber++, new ChocoboAIFollowOwner(this, (float)this.getMoveHelper().getSpeed(), 20F));
+		this.tasks.addTask(this.taskNumber++, new ChocoboAIFollowOwner(this, 20F));
 		this.tasks.addTask(this.taskNumber++, new ChocoboAITeleportToOwner(this, 20F));
     }
 	
@@ -398,6 +399,7 @@ public abstract class EntityAnimalChocobo extends EntityTameable implements IEnt
 	
 	public void toggleFollowStay()
 	{
+
 		if(!this.isFollowing() && !this.isWander())
 		{
 			this.setFollowing(true);

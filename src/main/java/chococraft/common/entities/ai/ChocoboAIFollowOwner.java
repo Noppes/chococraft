@@ -1,5 +1,6 @@
 package chococraft.common.entities.ai;
 
+import chococraft.common.entities.colours.EntityChocoboYellow;
 import net.minecraft.entity.ai.EntityAIBase;
 import chococraft.common.entities.EntityAnimalChocobo;
 
@@ -13,12 +14,12 @@ public class ChocoboAIFollowOwner extends EntityAIBase
 	private float originalStepHight;
 
 
-	public ChocoboAIFollowOwner(EntityAnimalChocobo chocobo, float moveSpeed, float teleportDistance)
+	public ChocoboAIFollowOwner(EntityAnimalChocobo chocobo, float teleportDistance)
 	{
         this.setMutexBits(1);
 		this.chocobo = chocobo;
 		this.teleportDistance = teleportDistance;
-		this.moveSpeed = moveSpeed;
+		this.moveSpeed = 1;//TODO in future we should make this link up to the chocobo speed table in Constants
 	}
 
 	/**
@@ -99,7 +100,7 @@ public class ChocoboAIFollowOwner extends EntityAIBase
 		{
 			this.followDelay = 10;
 
-			boolean followCheck = this.chocobo.getNavigator().tryMoveToEntityLiving(this.chocobo.getOwner(), this.moveSpeed);			
+			boolean followCheck = this.chocobo.getNavigator().tryMoveToEntityLiving(this.chocobo.getOwner(), this.moveSpeed);
 			if(!followCheck)
 			{
 				if(this.chocobo.getDistanceSqToEntity(this.chocobo.getOwner()) > (this.teleportDistance * this.teleportDistance))
