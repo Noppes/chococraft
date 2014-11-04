@@ -15,8 +15,8 @@
 
 package chococraft.common.entities;
 
-import chococraft.common.config.Constants;
 import chococraft.common.config.ChocoCraftItems;
+import chococraft.common.config.Constants;
 import chococraft.common.helper.ChocoboEntityHelper;
 import chococraft.common.network.PacketRegistry;
 import chococraft.common.network.clientSide.ChicoboCanGrowUp;
@@ -41,6 +41,7 @@ public class EntityChicobo extends EntityAnimalChocobo
 		super(world);
 		this.dataWatcher.addObject(Constants.DW_ID_CHIC_FLAGS, (byte) 0);
 		this.dataWatcher.addObject(Constants.DW_ID_CHIC_TIMEUNTILADULT, rand.nextInt(2000) + 27000);
+		this.dataWatcher.addObject(Constants.DW_ID_CHIC_COLOUR, this.color.ordinal());
 		this.setColor(chocoboColor.YELLOW);
 		this.setSize(0.5F, 0.5F);
 		this.growUp = false;
@@ -68,6 +69,7 @@ public class EntityChicobo extends EntityAnimalChocobo
 	public void setColor(chocoboColor color)
 	{
 		this.color = color;
+		this.dataWatcher.updateObject(Constants.DW_ID_CHIC_COLOUR, color.ordinal());
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(this.getColorMaxHealth());
 		this.setHealth(this.getColorMaxHealth());
 		if (color == chocoboColor.PURPLE)
@@ -147,6 +149,8 @@ public class EntityChicobo extends EntityAnimalChocobo
 		{
 			s = (new StringBuilder()).append(s).append(Constants.CHICOBO_ETXT_TAMED).toString();
 		}
+
+		this.color = getColour();
 		
 		switch(this.color)
 		{
@@ -225,7 +229,13 @@ public class EntityChicobo extends EntityAnimalChocobo
 	public int getTimeUntilAdult()
 	{
 		return this.dataWatcher.getWatchableObjectInt(Constants.DW_ID_CHIC_TIMEUNTILADULT);
-	}        
+	}
+
+	public chocoboColor getColour()
+	{
+		int ordinal = this.dataWatcher.getWatchableObjectInt(Constants.DW_ID_CHIC_COLOUR);
+		return chocoboColor.values()[ordinal];
+	}
 
 	@Override
 	public boolean isChild()

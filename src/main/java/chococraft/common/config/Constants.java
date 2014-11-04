@@ -223,6 +223,7 @@ public class Constants
 	// CHIC - EntityChicobo
 	public static int DW_ID_CHIC_FLAGS = 21;
 	public static int DW_ID_CHIC_TIMEUNTILADULT = 22;
+	public static int DW_ID_CHIC_COLOUR = 23;
 	
 	public static int DW_VAL_CHIC_CANGROWUP_ON = 1;
 	public static int DW_VAL_CHIC_CANGROWUP_OFF = -2;
@@ -241,6 +242,7 @@ public class Constants
 	
 	// CHOC - EntityChocobo
 	public static int DW_ID_CHOC_FLAGS = 21;
+
 	
 	public static int DW_VAL_CHOC_BREEDING_ON = 1;
 	public static int DW_VAL_CHOC_BREEDING_OFF = -2;
