@@ -17,7 +17,7 @@ public class GuiClickTextField extends GuiTextField
 	
 	public GuiClickTextField(FontRenderer fontRenderer, int xPos, int yPos, int width, int height)
 	{
-		super(fontRenderer, xPos, yPos, width, height);
+		super(11, fontRenderer, xPos, yPos, width, height);
 
 		this.xPos = xPos;
 		this.yPos = yPos;

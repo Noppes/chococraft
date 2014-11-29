@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
-import cpw.mods.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class DebugFileWriter
 {

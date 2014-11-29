@@ -25,9 +25,11 @@ import chococraft.common.entities.models.RenderChicobo;
 import chococraft.common.entities.models.RenderChocobo;
 import chococraft.common.network.PacketRegistry;
 import chococraft.common.network.serverSide.ChocoboUpdateRiderActionState;
-import cpw.mods.fml.client.registry.RenderingRegistry;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 public class ClientProxyChocoCraft extends CommonProxyChocoCraft
 {
@@ -42,22 +44,24 @@ public class ClientProxyChocoCraft extends CommonProxyChocoCraft
 	@Override
     public void registerRenderInformation()
     {
-        RenderingRegistry.registerEntityRenderingHandler(EntityChocoboYellow.class, new RenderChocobo(new ModelChocobo(), 0.5F));
-        RenderingRegistry.registerEntityRenderingHandler(EntityChocoboGreen.class, new RenderChocobo(new ModelChocobo(), 0.5F));
-        RenderingRegistry.registerEntityRenderingHandler(EntityChocoboBlue.class, new RenderChocobo(new ModelChocobo(), 0.5F));
-        RenderingRegistry.registerEntityRenderingHandler(EntityChocoboWhite.class, new RenderChocobo(new ModelChocobo(), 0.5F));
-        RenderingRegistry.registerEntityRenderingHandler(EntityChocoboBlack.class, new RenderChocobo(new ModelChocobo(), 0.5F));
-        RenderingRegistry.registerEntityRenderingHandler(EntityChocoboGold.class, new RenderChocobo(new ModelChocobo(), 0.5F));
-        RenderingRegistry.registerEntityRenderingHandler(EntityChocoboPink.class, new RenderChocobo(new ModelChocobo(), 0.5F));
-        RenderingRegistry.registerEntityRenderingHandler(EntityChocoboRed.class, new RenderChocobo(new ModelChocobo(), 0.5F));
-        RenderingRegistry.registerEntityRenderingHandler(EntityChocoboPurple.class, new RenderChocobo(new ModelChocobo(), 0.5F));
-        RenderingRegistry.registerEntityRenderingHandler(EntityChicobo.class, new RenderChicobo(new ModelChicobo(), 0.5F));        
+		RenderManager manager = Minecraft.getMinecraft().getRenderManager();
+		RenderingRegistry.registerEntityRenderingHandler(EntityChocoboYellow.class, new RenderChocobo(manager, new ModelChocobo(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityChocoboGreen.class, new RenderChocobo(manager, new ModelChocobo(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityChocoboBlue.class, new RenderChocobo(manager, new ModelChocobo(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityChocoboWhite.class, new RenderChocobo(manager, new ModelChocobo(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityChocoboBlack.class, new RenderChocobo(manager, new ModelChocobo(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityChocoboGold.class, new RenderChocobo(manager, new ModelChocobo(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityChocoboPink.class, new RenderChocobo(manager, new ModelChocobo(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityChocoboRed.class, new RenderChocobo(manager, new ModelChocobo(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityChocoboPurple.class, new RenderChocobo(manager, new ModelChocobo(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityChicobo.class, new RenderChicobo(manager, new ModelChicobo(), 0.5F));
     }
     
     @Override
     public int addArmor(String armor)
     {
-        return RenderingRegistry.addNewArmourRendererPrefix(armor);
+//        return RenderingRegistry.addNewArmourRendererPrefix(armor);
+return -1;
     }
     
     @Override

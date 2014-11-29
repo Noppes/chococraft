@@ -14,6 +14,8 @@
 
 package chococraft.common.config;
 
+import net.minecraft.util.EnumParticleTypes;
+
 public class Constants
 {
 	public final static String TCC_VERSION = "4.1.3";
@@ -197,10 +199,10 @@ public class Constants
 	public static boolean CHOCOBO_RED_CANJUMPHIGH       = false;
 	public static boolean CHOCOBO_PURPLE_CANJUMPHIGH    = false;
 	
-	public static String PARTICLE_HEART        = "heart";
-	public static String PARTICLE_SMOKE        = "smoke";
-	public static String PARTICLE_EXPLODE      = "explode";
-	public static String PARTICLE_SNOWBALLPOOF = "snowballpoof";
+	public static EnumParticleTypes PARTICLE_HEART        = EnumParticleTypes.HEART;
+	public static EnumParticleTypes PARTICLE_SMOKE        = EnumParticleTypes.SMOKE_NORMAL;
+	public static EnumParticleTypes PARTICLE_EXPLODE      = EnumParticleTypes.EXPLOSION_NORMAL;
+	public static EnumParticleTypes PARTICLE_SNOWBALLPOOF = EnumParticleTypes.SNOWBALL;
 	
 	// dataWatcher
 	// EAC - EntityAnimalChocobo

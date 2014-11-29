@@ -18,7 +18,7 @@ package chococraft.common.gui;
 
 import net.minecraft.client.Minecraft;
 import chococraft.common.entities.EntityAnimalChocobo;
-import cpw.mods.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.client.FMLClientHandler;
 
 public class GuiStarter
 {

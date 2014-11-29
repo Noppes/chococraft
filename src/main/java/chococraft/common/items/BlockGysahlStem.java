@@ -19,16 +19,18 @@ import chococraft.common.config.ChocoCraftBlocks;
 import chococraft.common.config.ChocoCraftCreativeTabs;
 import chococraft.common.config.ChocoCraftItems;
 import chococraft.common.config.Constants;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockPos;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -37,8 +39,9 @@ import java.util.Random;
 
 public class BlockGysahlStem extends BlockBush
 {
-	static final int MAX_STAGE = 4; 
-	private ArrayList<IIcon> icons;
+	static final int MAX_STAGE = 4;
+	public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, MAX_STAGE);
+//	private ArrayList<IIcon> icons;
 	
 	public BlockGysahlStem()
     {
@@ -49,9 +52,9 @@ public class BlockGysahlStem extends BlockBush
         this.disableStats();
         this.setStepSound(soundTypeGrass);
 		setHardness(0f);
-		setBlockName("gysahlStemBlock");
+		setUnlocalizedName("gysahlStemBlock");
     }
-
+/*
     @SideOnly(Side.CLIENT)
     @Override
     public IIcon getIcon(int i, int j)
@@ -61,8 +64,9 @@ public class BlockGysahlStem extends BlockBush
         	return this.icons.get(j);    		
     	}
     	return this.icons.get(4);
-	}
-    
+	}*/
+
+    /*
     @Override
     public void registerBlockIcons(IIconRegister iconRegister)
     {
@@ -73,15 +77,15 @@ public class BlockGysahlStem extends BlockBush
     	this.icons.add(3, iconRegister.registerIcon(Constants.TCC_MODID + ":" + Constants.KEY_GY_STEM04));
     	this.icons.add(4, iconRegister.registerIcon(Constants.TCC_MODID + ":" + Constants.KEY_GY_STEM05));
     }
-	
+	*/
     @Override
-	public void updateTick(World theWorld, int xPos, int yPos, int zPos, Random randInts)
+	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
-        super.updateTick(theWorld, xPos, yPos, zPos, randInts);
-
-        if (theWorld.getBlockLightValue(xPos, yPos + 1, zPos) >= 9)
+        super.updateTick(worldIn, pos, state, rand);
+//TODO 1.8
+/*        if (worldIn.getBlockLightValue(xPos, yPos + 1, zPos) >= 9)
         {
-            int gysahlStage = theWorld.getBlockMetadata(xPos, yPos, zPos);
+            int gysahlStage = worldIn.getBlockMetadata(xPos, yPos, zPos);
 
             if (gysahlStage < MAX_STAGE)
             {
@@ -90,23 +94,23 @@ public class BlockGysahlStem extends BlockBush
                 if (randInts.nextInt((int)(25F / f) + 1) == 0)
                 {
                     gysahlStage++;
-                    theWorld.setBlockMetadataWithNotify(xPos, yPos, zPos, gysahlStage, 2);
+                    worldIn.setBlockMetadataWithNotify(xPos, yPos, zPos, gysahlStage, 2);
                 }
             }
         }
-    }
+*/    }
 	
 	private float getGrowthRate(World theWorld, int xPos, int yPos, int zPos)
     {
         float growRate = 1.0F;
-        Block i = theWorld.getBlock(xPos, yPos, zPos - 1);
-		Block j = theWorld.getBlock(xPos, yPos, zPos + 1);
-		Block k = theWorld.getBlock(xPos - 1, yPos, zPos);
-		Block l = theWorld.getBlock(xPos + 1, yPos, zPos);
-		Block i1 = theWorld.getBlock(xPos - 1, yPos, zPos - 1);
-		Block j1 = theWorld.getBlock(xPos + 1, yPos, zPos - 1);
-		Block k1 = theWorld.getBlock(xPos + 1, yPos, zPos + 1);
-		Block l1 = theWorld.getBlock(xPos - 1, yPos, zPos + 1);
+        Block i = theWorld.getBlockState(new BlockPos(xPos, yPos, zPos - 1)).getBlock();
+		Block j = theWorld.getBlockState(new BlockPos(xPos, yPos, zPos + 1)).getBlock();
+		Block k = theWorld.getBlockState(new BlockPos(xPos - 1, yPos, zPos)).getBlock();
+		Block l = theWorld.getBlockState(new BlockPos(xPos + 1, yPos, zPos)).getBlock();
+		Block i1 = theWorld.getBlockState(new BlockPos(xPos - 1, yPos, zPos - 1)).getBlock();
+		Block j1 = theWorld.getBlockState(new BlockPos(xPos + 1, yPos, zPos - 1)).getBlock();
+		Block k1 = theWorld.getBlockState(new BlockPos(xPos + 1, yPos, zPos + 1)).getBlock();
+		Block l1 = theWorld.getBlockState(new BlockPos(xPos - 1, yPos, zPos + 1)).getBlock();
 
         boolean samePlantLeftOrRight = k.equals(this) || l.equals(this);
         boolean samePlantFrontOrBack = i.equals(this) || j.equals(this);
@@ -116,18 +120,18 @@ public class BlockGysahlStem extends BlockBush
         {
             for (int zTmp = zPos - 1; zTmp <= zPos + 1; zTmp++)
             {
-                Block baseBlockId = theWorld.getBlock(xTmp, yPos - 1, zTmp);
+                Block baseBlockId = theWorld.getBlockState(new BlockPos(xTmp, yPos - 1, zTmp)).getBlock();
                 float tmpGrowRate = 0.0F;
 
                 if (this.canThisPlantGrowOnThisBlock(baseBlockId))
                 {
                     tmpGrowRate = 1.0F;
-
-                    if (theWorld.getBlockMetadata(xTmp, yPos - 1, zTmp) > 0)
+//TODO 1.8
+/*                    if (theWorld.getBlockMetadata(xTmp, yPos - 1, zTmp) > 0)
                     {
                         tmpGrowRate = 3F;
                     }
-                }
+*/                }
 
                 if (xTmp != xPos || zTmp != zPos)
                 {
@@ -151,36 +155,38 @@ public class BlockGysahlStem extends BlockBush
     {
         return block.equals(Blocks.farmland);
     }
-    
-	//TODO check this - old
+
     @Override
-    public void dropBlockAsItemWithChance(World world, int i, int j, int k, int l, float f, int i1)
+    public void dropBlockAsItemWithChance(World world, BlockPos pos, IBlockState state, float chance, int fortune)
     {
-    	super.dropBlockAsItemWithChance(world, i, j, k, l, f, 0);
+    	super.dropBlockAsItemWithChance(world, pos, getDefaultState(), chance, 0);
     	if (!world.isRemote)
     	{
-    		int j1 = 3 + i1;
+    		int j1 = 3 + fortune;
     		for (int k1 = 0; k1 < j1; k1++)
     		{
-    			if (world.rand.nextInt(15) > l)
+				//TODO 1.8 - i don't even..
+/*    			if (world.rand.nextInt(15) > l)//err..
     			{
     				continue;
     			}
-    			float f1 = 0.7F;
+*/    			float f1 = 0.7F;
     			float f2 = world.rand.nextFloat() * f1 + (1.0F - f1) * 0.5F;
     			float f3 = world.rand.nextFloat() * f1 + (1.0F - f1) * 0.5F;
     			float f4 = world.rand.nextFloat() * f1 + (1.0F - f1) * 0.5F;
-    			EntityItem entityitem = new EntityItem(world, (float)i + f2, (float)j + f3, (float)k + f4, new ItemStack(ChocoCraftItems.gysahlSeedsItem));
-    			entityitem.delayBeforeCanPickup = 10;
+    			EntityItem entityitem = new EntityItem(world, (float)pos.getX() + f2, (float)pos.getY() + f3, (float)pos.getZ() + f4, new ItemStack(ChocoCraftItems.gysahlSeedsItem));
+    			entityitem.setPickupDelay(10);
     			world.spawnEntityInWorld(entityitem);
     		}
     	}
     }
 
     @Override
-    public Item getItemDropped(int i, Random random, int j)
+    public Item getItemDropped(IBlockState state, Random random, int fortune)
     {
-    	if (i == 4)
+		//TODO 1.8
+		/*
+    	if (state == 4)
     	{
     		if(random.nextInt(1000) > ModChocoCraft.gysahlGreenMutationRate)
     		{
@@ -199,18 +205,20 @@ public class BlockGysahlStem extends BlockBush
     		}
     	}
     	else
-        {
+        {*/
             return null;
-        }
+//        }
     }
 
 
 	//Called from a event , does not need override
-	public boolean onBonemealUse(World theWorld, int xPos, int yPos, int zPos)
+	public boolean onBonemealUse(World theWorld, BlockPos position)
 	{
-		if(theWorld.getBlockMetadata(xPos, yPos, zPos) < MAX_STAGE)
-		{		
-			theWorld.setBlockMetadataWithNotify(xPos, yPos, zPos, MAX_STAGE, 2);
+		int stage = ((Integer)theWorld.getBlockState(position).getValue(STAGE)).intValue();
+		if(stage < MAX_STAGE)
+		{
+			IBlockState state = theWorld.getBlockState(position).withProperty(STAGE, MAX_STAGE);
+			theWorld.setBlockState(position, state);
 			return true;
 		}
 		else

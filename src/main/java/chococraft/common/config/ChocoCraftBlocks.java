@@ -3,8 +3,8 @@ package chococraft.common.config;
 import chococraft.common.items.BlockGysahlGreen;
 import chococraft.common.items.BlockGysahlStem;
 import chococraft.common.items.BlockStraw;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
  * Created by clienthax on 23/10/2014.

@@ -3,6 +3,7 @@ package chococraft.common.helper;
 import java.util.Random;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.util.EnumParticleTypes;
 
 public class ChocoboParticleHelper
 {
@@ -11,7 +12,7 @@ public class ChocoboParticleHelper
 	// "enchantmenttable", "explode", "flame", "lava", "footstep", "splash",
 	// "largesmoke", "cloud", "reddust", "snowballpoof", "dripWater", "dripLava",
 	// "snowshovel", "slime", "heart", "angryVillager", "happyVillager"
-    public static void showParticleAroundEntityFx(String particleName, Entity entity)
+    public static void showParticleAroundEntityFx(EnumParticleTypes particleType, Entity entity)
     {
     	if(entity.worldObj.isRemote)
     	{
@@ -23,20 +24,20 @@ public class ChocoboParticleHelper
     		double partVelX = rand.nextGaussian() * 0.02D;
     		double partVelY = rand.nextGaussian() * 0.02D;
     		double partVelZ = rand.nextGaussian() * 0.02D;
-    		entity.worldObj.spawnParticle(particleName, partPosX, partPosY, partPosZ, partVelX, partVelY, partVelZ);
+    		entity.worldObj.spawnParticle(particleType, partPosX, partPosY, partPosZ, partVelX, partVelY, partVelZ);
     	}
     }
     
-    public static void showParticleAroundEntityFx(String particleName, Entity entity, int amount)
+    public static void showParticleAroundEntityFx(EnumParticleTypes particleType, Entity entity, int amount)
     {
     	for(int i = 0; i < amount; i++)
     	{
-    		showParticleAroundEntityFx(particleName, entity);
+    		showParticleAroundEntityFx(particleType, entity);
     	}
     }
     
-    public static void showParticleAroundEntityFxDebugger(String particleName, Entity entity)
+    public static void showParticleAroundEntityFxDebugger(EnumParticleTypes particleType, Entity entity)
     {
-    	showParticleAroundEntityFx(particleName, entity);
+    	showParticleAroundEntityFx(particleType, entity);
     } 
 }

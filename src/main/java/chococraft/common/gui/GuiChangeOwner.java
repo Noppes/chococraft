@@ -23,6 +23,8 @@ import org.lwjgl.input.Keyboard;
 import chococraft.common.entities.EntityAnimalChocobo;
 import chococraft.common.entities.EntityChicobo;
 
+import java.io.IOException;
+
 public class GuiChangeOwner extends GuiScreen
 {
 	private String newOwner;
@@ -89,8 +91,7 @@ public class GuiChangeOwner extends GuiScreen
 	}
 
 	@Override
-	protected void mouseClicked(int mouseX, int mouseY, int which)
-	{
+	protected void mouseClicked(int mouseX, int mouseY, int which) throws IOException {
 		super.mouseClicked(mouseX, mouseY, which);
 	}
 
@@ -102,7 +103,7 @@ public class GuiChangeOwner extends GuiScreen
 
 		//String message = stringtranslate.translateKey(messageSB.toString());
 		
-		this.drawCenteredString(this.mc.fontRenderer, "Give your " + ((this.chocobo instanceof EntityChicobo) ? "Chicobo" : "Chocobo") + " to " + this.newOwner + "?", this.width / 2, (this.height / 4 - 60) + 20, 0xffffff);
+		this.drawCenteredString(this.mc.fontRendererObj, "Give your " + ((this.chocobo instanceof EntityChicobo) ? "Chicobo" : "Chocobo") + " to " + this.newOwner + "?", this.width / 2, (this.height / 4 - 60) + 20, 0xffffff);
 		super.drawScreen(scrX, scrY, f);
 	}
 	

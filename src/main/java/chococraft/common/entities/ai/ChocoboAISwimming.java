@@ -12,7 +12,8 @@ public class ChocoboAISwimming extends EntityAIBase
 	{
         this.setMutexBits(4);
         this.chocobo = chocobo;
-        this.chocobo.getNavigator().setCanSwim(true);
+		//TODO 1.8
+//        this.chocobo.getNavigator().setCanSwim(true);
 	}
 	
 	/**

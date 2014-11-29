@@ -24,6 +24,8 @@ import org.lwjgl.input.Keyboard;
 import chococraft.common.entities.EntityAnimalChocobo;
 import chococraft.common.entities.EntityChicobo;
 
+import java.io.IOException;
+
 public class GuiNameChocobo extends GuiScreen
 {
 	private GuiTextField theGuiTextField;
@@ -53,7 +55,7 @@ public class GuiNameChocobo extends GuiScreen
 		//this.buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height / 4 + 120 + 12, stringtranslate.translateKey("gui.cancel")));
 		this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 4 + 96 + 12, "Accept"));
 		this.buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height / 4 + 120 + 12, "Cancel"));
-		this.theGuiTextField = new GuiTextField(this.mc.fontRenderer, this.width / 2 - 100, 60, 200, 20);
+		this.theGuiTextField = new GuiTextField(11, this.mc.fontRendererObj, this.width / 2 - 100, 60, 200, 20);
 		this.theGuiTextField.setText(this.chocobo.getName());
 		this.theGuiTextField.setFocused(true);
 		this.theGuiTextField.setMaxStringLength(20);
@@ -95,8 +97,7 @@ public class GuiNameChocobo extends GuiScreen
 	}
 
 	@Override
-	protected void mouseClicked(int i, int j, int k)
-	{
+	protected void mouseClicked(int i, int j, int k) throws IOException {
 		super.mouseClicked(i, j, k);
 		theGuiTextField.mouseClicked(i, j, k);
 	}
@@ -109,8 +110,8 @@ public class GuiNameChocobo extends GuiScreen
 		String s = (this.chocobo instanceof EntityChicobo) ? "Chicobo" : "Chocobo";
 		//this.drawCenteredString(this.fontRenderer, stringtranslate.translateKey((new StringBuilder()).append("Name your ").append(s).toString()), this.width / 2, (this.height / 4 - 60) + 20, 0xffffff);
 		//this.drawString(this.fontRenderer, stringtranslate.translateKey("New name:"), this.width / 2 - 100, 47, 0xa0a0a0);
-		this.drawCenteredString(this.mc.fontRenderer, (new StringBuilder()).append("Name your ").append(s).toString(), this.width / 2, (this.height / 4 - 60) + 20, 0xffffff);
-		this.drawString(this.mc.fontRenderer, "New name:", this.width / 2 - 100, 47, 0xa0a0a0);
+		this.drawCenteredString(this.mc.fontRendererObj, (new StringBuilder()).append("Name your ").append(s).toString(), this.width / 2, (this.height / 4 - 60) + 20, 0xffffff);
+		this.drawString(this.mc.fontRendererObj, "New name:", this.width / 2 - 100, 47, 0xa0a0a0);
 		this.theGuiTextField.drawTextBox();
 		super.drawScreen(i, j, f);
 	}

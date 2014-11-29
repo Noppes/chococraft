@@ -47,7 +47,7 @@ public class ChocoboAIWatchClosest extends EntityAIBase
     		}
     		else
     		{
-    			this.closestEntity = this.theWatcher.worldObj.findNearestEntityWithinAABB(this.watchedClass, this.theWatcher.boundingBox.expand((double)this.watchDistance, 3.0D, (double)this.watchDistance), this.theWatcher);
+    			this.closestEntity = this.theWatcher.worldObj.findNearestEntityWithinAABB(this.watchedClass, this.theWatcher.getBoundingBox().expand((double)this.watchDistance, 3.0D, (double)this.watchDistance), this.theWatcher);
     		}
 
     		return this.closestEntity != null;

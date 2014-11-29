@@ -23,10 +23,10 @@ import chococraft.common.gui.GuiStarter;
 import chococraft.common.helper.ChocoboPlayerHelper;
 import chococraft.common.items.BlockGysahlStem;
 import chococraft.common.network.PacketRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.eventhandler.Event;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.eventhandler.Event;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntitySkeleton;
@@ -52,7 +52,7 @@ public class ChocoCraftEventCommon
 	{
 		if (event.block.equals(ChocoCraftBlocks.gysahlStemBlock))
 		{
-			if (((BlockGysahlStem) ChocoCraftBlocks.gysahlStemBlock).onBonemealUse(event.world, event.x, event.y, event.z))
+			if (((BlockGysahlStem) ChocoCraftBlocks.gysahlStemBlock).onBonemealUse(event.world, event.pos))
 			{
 				event.setResult(Event.Result.ALLOW);
 			}
@@ -177,12 +177,12 @@ public class ChocoCraftEventCommon
         			if(currentItem.getItem().equals(ChocoCraftItems.chocoboFeatherItem))
         			{
 						if(!event.world.isRemote)
-        				if(player.worldObj.getBlock(event.x, event.y, event.z) == Blocks.bookshelf)
+        				if(player.worldObj.getBlockState(event.pos).getBlock() == Blocks.bookshelf)
         				{
-           	        		player.worldObj.setBlockToAir(event.x, event.y, event.z);
+           	        		player.worldObj.setBlockToAir(event.pos);
            	        		ChocoboPlayerHelper.useCurrentItem(player);
            	        		ItemStack itemstack = new ItemStack(ChocoCraftItems.chocopediaItem, 1, 0);
-							EntityItem entityItem = new EntityItem(player.worldObj, event.x, event.y, event.z, itemstack);
+							EntityItem entityItem = new EntityItem(player.worldObj, event.pos.getX(), event.pos.getY(), event.pos.getZ(), itemstack);
 							player.worldObj.spawnEntityInWorld(entityItem);
         				}
         			}

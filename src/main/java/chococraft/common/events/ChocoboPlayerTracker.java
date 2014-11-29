@@ -17,8 +17,8 @@ package chococraft.common.events;
 import chococraft.common.network.PacketRegistry;
 import chococraft.common.network.clientSide.ChocoboLocalSetupUpdate;
 import chococraft.common.network.clientSide.ChocoboSetupUpdate;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraft.entity.player.EntityPlayerMP;
 
 

@@ -22,19 +22,17 @@ import chococraft.common.network.PacketRegistry;
 import chococraft.common.proxy.CommonProxyChocoCraft;
 import chococraft.common.tick.ServerSpawnTickHandler;
 import chococraft.common.worldgen.WorldGenGysahls;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.io.File;
 
@@ -126,13 +124,13 @@ public class ModChocoCraft
 		BiomeGenBase.hell
 	};
 
-	@Instance(Constants.TCC_MODID)
+	@Mod.Instance(Constants.TCC_MODID)
 	public static ModChocoCraft instance;
 
 	@SidedProxy(clientSide = "chococraft.client.ClientProxyChocoCraft", serverSide = "chococraft.common.proxy.CommonProxyChocoCraft")
 	public static CommonProxyChocoCraft proxy;
 
-	@EventHandler
+	@Mod.EventHandler
 	public void preLoadChocoCraft(FMLPreInitializationEvent preInitEvent)
 	{
 
@@ -200,7 +198,7 @@ public class ModChocoCraft
 		ChocoCraftItems.registerItems();
 	}
 	
-	@EventHandler
+	@Mod.EventHandler
 	public void loadChocoCraft(FMLInitializationEvent loadEvent)
 	{
 		//this.createCreativeTab();

@@ -17,11 +17,15 @@ package chococraft.common.gui;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 
+import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
@@ -29,9 +33,8 @@ import chococraft.common.ModChocoCraft;
 import chococraft.common.entities.EntityAnimalChocobo;
 import chococraft.common.entities.EntityChocoboRideable;
 import chococraft.common.helper.ChocoboEntityHelper;
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
+import java.io.IOException;
 
 @SideOnly(Side.CLIENT)
 public class GuiChocopedia extends GuiScreen
@@ -243,8 +246,7 @@ public class GuiChocopedia extends GuiScreen
 	}
 
 	@Override
-	protected void mouseClicked(int i, int j, int k)
-	{
+	protected void mouseClicked(int i, int j, int k) throws IOException {
 		super.mouseClicked(i, j, k);
 	}
 
@@ -270,15 +272,15 @@ public class GuiChocopedia extends GuiScreen
 				breedStatus = "can breed";
 			}
 
-			this.drawCenteredString(this.mc.fontRenderer, this.chocobo.getName(), this.width / 2, (height / 4 - 60) + 20, 0xffffff);
+			this.drawCenteredString(this.mc.fontRendererObj, this.chocobo.getName(), this.width / 2, (height / 4 - 60) + 20, 0xffffff);
 
 			int posY = 24;
 			int posX = this.width / 2 + 10;
 			int fontColour = 0xa0a0a0;
 
-			this.drawString(this.mc.fontRenderer, ownerName,   posX, (posY += 24), fontColour);
-			this.drawString(this.mc.fontRenderer, health,      posX, (posY += 24), fontColour);
-			this.drawString(this.mc.fontRenderer, gender + " (" + breedStatus + ")",      posX, (posY += 24), fontColour);
+			this.drawString(this.mc.fontRendererObj, ownerName,   posX, (posY += 24), fontColour);
+			this.drawString(this.mc.fontRendererObj, health,      posX, (posY += 24), fontColour);
+			this.drawString(this.mc.fontRendererObj, gender + " (" + breedStatus + ")",      posX, (posY += 24), fontColour);
 
 			if(this.chocobo.func_152113_b().equals("Torojima") || this.chocobo.func_152113_b().equals("clienthax"))//getOwnerName
 			{
@@ -288,20 +290,20 @@ public class GuiChocopedia extends GuiScreen
 				int amountWildChocobos = ChocoboEntityHelper.countWildChocobos(this.chocobo.worldObj);
 				int amountChocobos = ChocoboEntityHelper.countEntities(EntityAnimalChocobo.class, this.chocobo.worldObj);
 				int debugFontColour = 0x11a0a0;
-				String biomeName = this.chocobo.worldObj.getBiomeGenForCoords((int)this.chocobo.posX, (int)this.chocobo.posZ).biomeName;
+				String biomeName = this.chocobo.worldObj.getBiomeGenForCoords(new BlockPos((int)this.chocobo.posX, 0, (int)this.chocobo.posZ)).biomeName;
 				String biomeDisplayString = "Biome: " + biomeName;
 
 				String chocoAmountString = (new StringBuilder()).append("Chocos: ").append(amountChocobos).append(" wild: ").append(amountWildChocobos).toString();
-				this.drawString(this.mc.fontRenderer, chocoAmountString,   posX, (posY += debugLineHeight), debugFontColour);
-				this.drawString(this.mc.fontRenderer, biomeDisplayString,   posX, (posY += debugLineHeight), debugFontColour);
-				this.drawString(this.mc.fontRenderer, "Spawn: " + ModChocoCraft.spawnDbStatus,   posX, (posY += debugLineHeight), debugFontColour);
+				this.drawString(this.mc.fontRendererObj, chocoAmountString,   posX, (posY += debugLineHeight), debugFontColour);
+				this.drawString(this.mc.fontRendererObj, biomeDisplayString,   posX, (posY += debugLineHeight), debugFontColour);
+				this.drawString(this.mc.fontRendererObj, "Spawn: " + ModChocoCraft.spawnDbStatus,   posX, (posY += debugLineHeight), debugFontColour);
 
 				long spawnTimeDelay = this.chocobo.worldObj.getTotalWorldTime() - ModChocoCraft.spawnDbTimeDelay;
 				String spawnTimeDelayString = (new StringBuilder()).append("Spawn Time: ").append(spawnTimeDelay).toString();
-				this.drawString(this.mc.fontRenderer, spawnTimeDelayString,   posX, (posY += debugLineHeight), debugFontColour);
+				this.drawString(this.mc.fontRendererObj, spawnTimeDelayString,   posX, (posY += debugLineHeight), debugFontColour);
 
 				String statusRemoteClient = (new StringBuilder()).append("Remote Cient: ").append(Boolean.toString(ModChocoCraft.isRemoteClient)).toString();
-				this.drawString(this.mc.fontRenderer, statusRemoteClient,   posX, (posY += debugLineHeight), debugFontColour);
+				this.drawString(this.mc.fontRendererObj, statusRemoteClient,   posX, (posY += debugLineHeight), debugFontColour);
 			}
 		}
 		else
@@ -316,16 +318,16 @@ public class GuiChocopedia extends GuiScreen
 			if (this.currPage == 0)
 			{
 				int posY = 50;
-				int titelWidth = this.mc.fontRenderer.getStringWidth(this.bookTitle);
-				this.mc.fontRenderer.drawString(EnumChatFormatting.GOLD + this.bookTitle, xCenter + 36 + (116 - titelWidth) / 2, posY, 0);
+				int titelWidth = this.mc.fontRendererObj.getStringWidth(this.bookTitle);
+				this.mc.fontRendererObj.drawString(EnumChatFormatting.GOLD + this.bookTitle, xCenter + 36 + (116 - titelWidth) / 2, posY, 0);
 				
 				posY += 10;
-				int authorWidth = this.mc.fontRenderer.getStringWidth(this.bookAuthor);
-				this.mc.fontRenderer.drawString(EnumChatFormatting.DARK_GRAY + this.bookAuthor, xCenter + 36 + (116 - authorWidth) / 2, posY, 0);
+				int authorWidth = this.mc.fontRendererObj.getStringWidth(this.bookAuthor);
+				this.mc.fontRendererObj.drawString(EnumChatFormatting.DARK_GRAY + this.bookAuthor, xCenter + 36 + (116 - authorWidth) / 2, posY, 0);
 				
 				if(this.player.getDisplayName().equals("Torojima") || this.player.getDisplayName().equals("clienthax"))
 				{
-					String biomeDisplayString = "Biome: " + this.player.worldObj.getBiomeGenForCoords((int)this.player.posX, (int)this.player.posZ).biomeName;
+					String biomeDisplayString = "Biome: " + this.player.worldObj.getBiomeGenForCoords(new BlockPos((int)this.player.posX, 0, (int)this.player.posZ)).biomeName;
 					String spawnStatus = "Spawn: " + ModChocoCraft.spawnDbStatus;
 
 					int amountWildChocobos = ChocoboEntityHelper.countWildChocobos(this.player.worldObj);
@@ -335,13 +337,13 @@ public class GuiChocopedia extends GuiScreen
 					String statusRemoteClient = (new StringBuilder()).append("Remote: ").append(Boolean.toString(ModChocoCraft.isRemoteClient)).toString();
 					
 					posY += 30;
-					this.mc.fontRenderer.drawString(biomeDisplayString, xCenter + 36, posY, 0);
+					this.mc.fontRendererObj.drawString(biomeDisplayString, xCenter + 36, posY, 0);
 					posY += 10;
-					this.mc.fontRenderer.drawString(spawnStatus, xCenter + 36, posY, 0);
+					this.mc.fontRendererObj.drawString(spawnStatus, xCenter + 36, posY, 0);
 					posY += 10;
-					this.mc.fontRenderer.drawString(chocoAmountString, xCenter + 36, posY, 0);
+					this.mc.fontRendererObj.drawString(chocoAmountString, xCenter + 36, posY, 0);
 					posY += 10;
-					this.mc.fontRenderer.drawString(statusRemoteClient, xCenter + 36, posY, 0);
+					this.mc.fontRendererObj.drawString(statusRemoteClient, xCenter + 36, posY, 0);
 				}
 			}
 			else
@@ -354,15 +356,15 @@ public class GuiChocopedia extends GuiScreen
 					int indicatorCurrentPage = this.currPage -1;
 					int indicatorAmountPages = ChocopediaPages.Instance().getNPages() - 2;
 					String pageIndicator = String.format(StatCollector.translateToLocal("book.pageIndicator"), indicatorCurrentPage, indicatorAmountPages);
-					int pageIndicatorWidth = this.mc.fontRenderer.getStringWidth(pageIndicator);
-					this.mc.fontRenderer.drawString(pageIndicator, xCenter - pageIndicatorWidth + this.bookImageWidth - 44, 2 + 16, 0);
+					int pageIndicatorWidth = this.mc.fontRendererObj.getStringWidth(pageIndicator);
+					this.mc.fontRendererObj.drawString(pageIndicator, xCenter - pageIndicatorWidth + this.bookImageWidth - 44, 2 + 16, 0);
 				}
 
 				if (this.currPage >= 0 && this.currPage < pages.getNPages())
 				{
 					pageContent = pages.getPage(this.currPage);
 				}
-				this.mc.fontRenderer.drawSplitString(pageContent, xCenter + 36, 2 + 16 + 16, 116, 0);
+				this.mc.fontRendererObj.drawSplitString(pageContent, xCenter + 36, 2 + 16 + 16, 116, 0);
 			}
 		}
 		super.drawScreen(i, j, f);

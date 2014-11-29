@@ -14,6 +14,7 @@
 
 package chococraft.common.gui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import net.minecraft.client.gui.GuiButton;
@@ -69,7 +70,7 @@ public class GuiSelectNewOwner extends GuiScreen
 		this.buttonList.add(new GuiButton(2, this.width / 2 + 90, this.height / 2 - 50, 40, 20, "last"));
 		this.buttonList.add(new GuiButton(3, this.width / 2 + 90, this.height / 2 - 20, 40, 20, "next"));
 
-		this.tfNewOnwer = new GuiTextField(this.mc.fontRenderer, this.width / 2 - 100, this.height / 4 + 96 + 12, 180, 20);
+		this.tfNewOnwer = new GuiTextField(11, this.mc.fontRendererObj, this.width / 2 - 100, this.height / 4 + 96 + 12, 180, 20);
 		this.tfNewOnwer.setText("");
 		this.tfNewOnwer.setFocused(true);
 		this.tfNewOnwer.setCanLoseFocus(false);
@@ -93,7 +94,7 @@ public class GuiSelectNewOwner extends GuiScreen
 
 	private GuiClickTextField createPlayerListTextField(int x, int y)
 	{
-		GuiClickTextField gctf = new GuiClickTextField(this.mc.fontRenderer, x, y, 180, 20);
+		GuiClickTextField gctf = new GuiClickTextField(this.mc.fontRendererObj, x, y, 180, 20);
 		gctf.setReceiver(this);
 		gctf.setFocused(false);
 		return gctf;
@@ -204,8 +205,7 @@ public class GuiSelectNewOwner extends GuiScreen
 	}
 	
 	@Override
-	protected void mouseClicked(int x, int y, int k)
-	{
+	protected void mouseClicked(int x, int y, int k) throws IOException {
 		super.mouseClicked(x, y, k);
 		tfNewOnwer.mouseClicked(x, y, k);
 		for(int i = 0; i < this.plViewListSize; i++)
@@ -225,9 +225,9 @@ public class GuiSelectNewOwner extends GuiScreen
 
 		//String message = stringtranslate.translateKey(messageSB.toString());
 		String message = "Give your " + ((this.chocobo instanceof EntityChicobo) ? "Chicobo" : "Chocobo");
-		this.drawCenteredString(this.mc.fontRenderer, message, this.width / 2, (this.height / 4 - 60) + 20, 0xffffff);
+		this.drawCenteredString(this.mc.fontRendererObj, message, this.width / 2, (this.height / 4 - 60) + 20, 0xffffff);
 		//this.drawString(this.fontRenderer, stringtranslate.translateKey("to new owner:"), this.width / 2 - 100, 30, 0xa0a0a0);		
-		this.drawString(this.mc.fontRenderer, "to new owner:", this.width / 2 - 100, 30, 0xa0a0a0);
+		this.drawString(this.mc.fontRendererObj, "to new owner:", this.width / 2 - 100, 30, 0xa0a0a0);
 		this.tfNewOnwer.drawTextBox();
 		for(GuiTextField gtf : this.tfArPlayerList)
 		{
@@ -250,11 +250,11 @@ public class GuiSelectNewOwner extends GuiScreen
 			if(playerObj instanceof EntityPlayer)
 			{
 				EntityPlayer player = (EntityPlayer)playerObj;
-				if(nameStart == null || player.getDisplayName().startsWith(nameStart))
+				if(nameStart == null || player.getDisplayName().getUnformattedTextForChat().startsWith(nameStart))
 				{
 					//if(!player.equals(this.chocobo.getOwner()))
 					{
-						playerNames.add(player.getDisplayName());
+						playerNames.add(player.getDisplayName().getUnformattedText());
 					}
 				}
 			}

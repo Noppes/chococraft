@@ -2,8 +2,8 @@ package chococraft.common.config;
 
 import chococraft.common.entities.EntityChicobo;
 import chococraft.common.entities.colours.*;
-import cpw.mods.fml.common.registry.EntityRegistry;
 import net.minecraft.entity.Entity;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 /**
  * Created by clienthax on 24/10/2014.

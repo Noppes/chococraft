@@ -14,14 +14,13 @@
 
 package chococraft.common.items;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import chococraft.common.config.Constants;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 
 public class ChocoboItem extends Item
@@ -29,6 +28,7 @@ public class ChocoboItem extends Item
 	public ChocoboItem()
 	{
 		//this.setCreativeTab(ModChocoCraft.chocoboCreativeItems);
+//		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(this, 0, new ModelResourceLocation(Constants.TCC_MODID + ":" + this.getUnlocalizedName().substring(5), "inventory"));
 	}
 
 	@Override
@@ -37,12 +37,4 @@ public class ChocoboItem extends Item
 		super.onItemRightClick(itemStack, world, player);		
 		return itemStack;
 	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void registerIcons(IIconRegister iconRegister)
-	{
-		String name = this.getUnlocalizedName().substring(5);
-		this.itemIcon = iconRegister.registerIcon(Constants.TCC_MODID + ":" + name);
-	}	
 }

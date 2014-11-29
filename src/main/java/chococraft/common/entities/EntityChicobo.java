@@ -59,8 +59,9 @@ public class EntityChicobo extends EntityAnimalChocobo
         //this.tasks.addTask(this.taskNumber++, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         //this.tasks.addTask(this.taskNumber++, new EntityAILookIdle(this));
 	}
-	
-	@Override
+
+	//TODO 1.8
+//@Override
     public boolean isAIEnabled()
     {
         return true;
@@ -368,9 +369,9 @@ public class EntityChicobo extends EntityAnimalChocobo
 			this.showAmountHeartsOrSmokeFx(false, 7);
 		}
 	}
-
-	@Override
-	public void updateEntityActionState()
+	//TODO 1.8
+//	@Override
+	public void updateEntityActionState_fixme()
 	{
 		if (!this.hasPath() && this.isFollowing() && this.isTamed())
 		{
@@ -386,8 +387,8 @@ public class EntityChicobo extends EntityAnimalChocobo
 				}
 				float distanceToOwner = owner.getDistanceToEntity(this);
 				if (distanceToOwner > 10F)
-				{
-					this.getPathOrWalkableBlock(owner, distanceToOwner);
+				{//TODO 1.8
+//					this.getPathOrWalkableBlock(owner, distanceToOwner);
 				}
 				else
 				{

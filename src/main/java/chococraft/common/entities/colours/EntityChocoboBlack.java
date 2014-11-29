@@ -109,7 +109,7 @@ public class EntityChocoboBlack extends EntityChocobo
 		if(this.riddenByEntity instanceof EntityPlayer && ModChocoCraft.riderBuffsEnabled)
 		{
 			EntityPlayer rider = (EntityPlayer)this.riddenByEntity;			
-			rider.addPotionEffect(new PotionEffect(16, 100, -1, true));	
+			rider.addPotionEffect(new PotionEffect(16, 100, -1, true, true));
 		}
 	}
 
@@ -120,9 +120,9 @@ public class EntityChocoboBlack extends EntityChocobo
 	}
 
 	@Override
-	protected void fall(float fallHeight)
+	public void fall(float fallHeight, float multiplier)
 	{
-		super.fall(fallHeight);
+		super.fall(fallHeight, multiplier);
 	}
 
 	@Override

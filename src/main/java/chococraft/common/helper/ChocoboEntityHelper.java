@@ -20,9 +20,9 @@ import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
-import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import chococraft.common.entities.EntityChocobo;
@@ -71,7 +71,7 @@ public class ChocoboEntityHelper
 			{
 				if(!((EntityChocobo)entity).isTamed())
 				{
-					Chunk entityChunk = world.getChunkFromBlockCoords(MathHelper.floor_double(entity.posX), MathHelper.floor_double(entity.posZ));
+					Chunk entityChunk = world.getChunkFromChunkCoords(MathHelper.floor_double(entity.posX), MathHelper.floor_double(entity.posZ));
 					if(entityChunk.equals(chunk))
 					{
 						amountEntities++;
@@ -85,9 +85,9 @@ public class ChocoboEntityHelper
     public static boolean isEntityViewingUnderWater(World world, EntityLiving entity)
     {
     	Vec3 vector = ActiveRenderInfo.projectViewFromEntity(entity, 90.0F);
-        ChunkPosition chunkPos = new ChunkPosition(vector);
-        Block blockFront = world.getBlock(chunkPos.chunkPosX, chunkPos.chunkPosY, chunkPos.chunkPosZ);
-        Block blockAbove = world.getBlock(chunkPos.chunkPosX, chunkPos.chunkPosY + 1, chunkPos.chunkPosZ);
+		BlockPos blockPos = new BlockPos(vector);
+        Block blockFront = world.getBlockState(blockPos).getBlock();
+        Block blockAbove = world.getBlockState(blockPos.add(0, 1, 0)).getBlock();
         if(blockAbove.equals(Blocks.air) || blockFront.equals(Blocks.air))
         {
         	return false;
@@ -117,7 +117,7 @@ public class ChocoboEntityHelper
 			{
 				for(int z = sPosZ; z <= ePosZ; z++)
 				{
-			    	if(!world.isAirBlock(x, y, z))
+			    	if(!world.isAirBlock(new BlockPos(x, y, z)))
 			    	{
 			    		return false;
 			    	}

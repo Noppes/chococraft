@@ -21,7 +21,7 @@ import chococraft.common.config.ChocoCraftBlocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenFlowers;
-import cpw.mods.fml.common.IWorldGenerator;
+import net.minecraftforge.fml.common.IWorldGenerator;
 
 
 public class WorldGenGysahls implements IWorldGenerator
@@ -36,8 +36,8 @@ public class WorldGenGysahls implements IWorldGenerator
 			{
 				int randPosX = chunkX*16 + random.nextInt(16);
 				int randPosZ = chunkZ*16 + random.nextInt(16);
-				int randPosY = world.getTopSolidOrLiquidBlock(randPosX, randPosZ);
-				new WorldGenFlowers(ChocoCraftBlocks.gysahlGreenBlock).generate(world, random, randPosX, randPosY, randPosZ);
+//				int randPosY = world.getTopSolidOrLiquidBlock(randPosX, randPosZ);
+//				new WorldGenFlowers(ChocoCraftBlocks.gysahlGreenBlock).generate(world, random, randPosX, randPosY, randPosZ);
 			}
 		}
 	}

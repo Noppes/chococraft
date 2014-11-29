@@ -2,7 +2,7 @@ package chococraft.common.config;
 
 import chococraft.common.ModChocoCraft;
 import chococraft.common.items.*;
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;

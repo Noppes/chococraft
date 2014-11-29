@@ -14,11 +14,13 @@
 
 package chococraft.common.bags;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import chococraft.common.entities.EntityChocoboRideable;
+import net.minecraft.util.IChatComponent;
 
 
 public class ChocoSaddleBagInventory extends ChocoBagInventory
@@ -76,13 +78,18 @@ public class ChocoSaddleBagInventory extends ChocoBagInventory
 	}
 
 	@Override
-	public String getInventoryName() {
+	public String getName() {
 		return null;
 	}
 
 	@Override
-	public boolean hasCustomInventoryName() {
+	public boolean hasCustomName() {
 		return false;
+	}
+
+	@Override
+	public IChatComponent getDisplayName() {
+		return null;
 	}
 
 	@Override
@@ -91,12 +98,32 @@ public class ChocoSaddleBagInventory extends ChocoBagInventory
 	}
 
 	@Override
-	public void openInventory() {
+	public void openInventory(EntityPlayer player) {
 
 	}
 
 	@Override
-	public void closeInventory() {
+	public void closeInventory(EntityPlayer player) {
+
+	}
+
+	@Override
+	public int getField(int id) {
+		return 0;
+	}
+
+	@Override
+	public void setField(int id, int value) {
+
+	}
+
+	@Override
+	public int getFieldCount() {
+		return 0;
+	}
+
+	@Override
+	public void clear() {
 
 	}
 }

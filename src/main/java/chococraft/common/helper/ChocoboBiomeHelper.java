@@ -2,6 +2,7 @@ package chococraft.common.helper;
 
 import java.util.ArrayList;
 
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenHell;
@@ -64,7 +65,7 @@ public class ChocoboBiomeHelper
 	
 	public static boolean isBiomeHell(World world, int posX, int posZ)
 	{
-		BiomeGenBase chocoBgb = world.getBiomeGenForCoords(posX, posZ);
+		BiomeGenBase chocoBgb = world.getBiomeGenForCoords(new BlockPos(posX, 0, posZ));
 		return chocoBgb instanceof BiomeGenHell || chocoBgb instanceof BiomeGenEnd;
 
 	}

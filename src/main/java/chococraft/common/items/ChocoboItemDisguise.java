@@ -2,14 +2,11 @@ package chococraft.common.items;
 
 import chococraft.common.config.ChocoCraftCreativeTabs;
 import chococraft.common.config.ChocoCraftItems;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import chococraft.common.config.Constants;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 //public class ChocoboItemDisguise extends ItemArmor implements IArmorTextureProvider
 public class ChocoboItemDisguise extends ItemArmor
@@ -33,7 +30,7 @@ public class ChocoboItemDisguise extends ItemArmor
 		this.maxStackSize = 1;
 		this.setCreativeTab(ChocoCraftCreativeTabs.tabChococraft);
 	}
-
+/*
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister)
@@ -41,7 +38,7 @@ public class ChocoboItemDisguise extends ItemArmor
 		String name = this.getUnlocalizedName().substring(5);
 		this.itemIcon = iconRegister.registerIcon(Constants.TCC_MODID + ":" + name);
 	}
-	
+*/
     @Override
 	public int getItemEnchantability()
     {

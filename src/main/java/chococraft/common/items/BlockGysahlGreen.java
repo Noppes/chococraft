@@ -16,16 +16,14 @@ package chococraft.common.items;
 
 import chococraft.common.config.ChocoCraftCreativeTabs;
 import chococraft.common.config.Constants;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
-import net.minecraft.block.BlockFlower;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.block.BlockFurnace;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import java.util.List;
 
@@ -40,22 +38,9 @@ public class BlockGysahlGreen extends BlockBush
 		this.disableStats();
 		setStepSound(Block.soundTypeGrass);
 		setHardness(0.0F);
-		setBlockName("gysahlGreenBlock");
+		setUnlocalizedName("gysahlGreenBlock");
 		this.setCreativeTab(ChocoCraftCreativeTabs.tabChococraft);
-
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public IIcon getIcon(int i, int j)
-	{
-    	return this.blockIcon;
-	}
-    
-    @Override
-    public void registerBlockIcons(IIconRegister iconRegister)
-    {
-    	this.blockIcon = iconRegister.registerIcon(Constants.TCC_MODID + ":" + Constants.KEY_GY_GREEN);
+//		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(this), 0, new ModelResourceLocation(Constants.TCC_MODID + ":" + Constants.KEY_GY_GREEN, "inventory"));
     }
 
 }

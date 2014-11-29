@@ -19,12 +19,13 @@ import chococraft.common.ModChocoCraft;
 import chococraft.common.entities.EntityAnimalChocobo.chocoboColor;
 import chococraft.common.network.PacketRegistry;
 import chococraft.common.network.clientSide.ChocoboParticles;
-import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 public class EntityPurpleChocoboEgg extends EntityThrowable
 {
@@ -69,12 +70,12 @@ public class EntityPurpleChocoboEgg extends EntityThrowable
 		}
 	}
 
-	protected void sendParticleUpdate(String particleName, EntityAnimalChocobo chocobo, int amount)
+	protected void sendParticleUpdate(EnumParticleTypes particleType, EntityAnimalChocobo chocobo, int amount)
 	{
 		if (!this.worldObj.isRemote)
 		{
-			ChocoboParticles packet = new ChocoboParticles(chocobo, particleName, amount);
-			int dimension = chocobo.worldObj.provider.dimensionId;
+			ChocoboParticles packet = new ChocoboParticles(chocobo, particleType, amount);
+			int dimension = chocobo.worldObj.provider.getDimensionId();
 			NetworkRegistry.TargetPoint targetPoint = new NetworkRegistry.TargetPoint(dimension, chocobo.lastTickPosX, chocobo.lastTickPosY, chocobo.lastTickPosZ, 16*5);
 			PacketRegistry.INSTANCE.sendToAllAround(packet, targetPoint);
 		}		

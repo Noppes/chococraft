@@ -1,11 +1,10 @@
 package chococraft.common.items;
 
 import chococraft.common.config.ChocoCraftCreativeTabs;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemFood;
 import chococraft.common.config.Constants;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ChocoboItemFood extends ItemFood
 {
@@ -16,11 +15,12 @@ public class ChocoboItemFood extends ItemFood
 		this.setCreativeTab(ChocoCraftCreativeTabs.tabChococraft);
 	}
 	
-	@SideOnly(Side.CLIENT)
+/*	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister)
 	{
 		String name = this.getUnlocalizedName().substring(5);
 		this.itemIcon = iconRegister.registerIcon(Constants.TCC_MODID + ":" + name);
 	}
+*/
 }

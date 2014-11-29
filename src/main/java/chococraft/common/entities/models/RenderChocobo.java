@@ -18,6 +18,7 @@ package chococraft.common.entities.models;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -32,9 +33,9 @@ import chococraft.common.entities.EntityChocobo;
 
 public class RenderChocobo extends RenderLiving
 {
-	public RenderChocobo(ModelBase modelbase, float f)
+	public RenderChocobo(RenderManager manager, ModelBase modelbase, float f)
 	{
-		super(modelbase, f);
+		super(manager, modelbase, f);
 	}
 
 	public void renderChocobo(EntityChocobo entitychocobo, double d, double d1, double d2, float f, float f1)
@@ -43,7 +44,7 @@ public class RenderChocobo extends RenderLiving
 		super.doRender(entitychocobo, d, d1, d2, f, f1);
 		if (entitychocobo.canRenderName())
 		{
-			super.func_147906_a(entitychocobo, entitychocobo.getName(), d, (d1 + ModChocoCraft.renderNameHeight), d2, maxNameDistance);//renderLivingLabel
+			super.renderLivingLabel(entitychocobo, entitychocobo.getName(), d, (d1 + ModChocoCraft.renderNameHeight), d2, maxNameDistance);//renderLivingLabel
 		}
 	}
 

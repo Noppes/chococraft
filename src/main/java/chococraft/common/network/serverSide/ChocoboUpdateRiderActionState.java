@@ -5,11 +5,11 @@ import chococraft.common.entities.EntityAnimalChocobo;
 import chococraft.common.entities.EntityChocoboRideable;
 import chococraft.common.entities.RiderActionState;
 import chococraft.common.network.PacketHelper;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 /**
  * Created by clienthax on 22/10/2014.
@@ -27,7 +27,7 @@ public class ChocoboUpdateRiderActionState implements IMessage {
 
 	public ChocoboUpdateRiderActionState(EntityAnimalChocobo chocobo, Entity rider) {
 		this.entityID = chocobo.getEntityId();
-		this.dimensionID = chocobo.worldObj.provider.dimensionId;
+		this.dimensionID = chocobo.worldObj.provider.getDimensionId();
 
 		RiderActionState ras = ModChocoCraft.proxy.getRiderActionState(rider);
 		if(null != ras)

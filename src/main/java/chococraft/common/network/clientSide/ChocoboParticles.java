@@ -3,10 +3,10 @@ package chococraft.common.network.clientSide;
 import chococraft.common.entities.EntityAnimalChocobo;
 import chococraft.common.helper.ChocoboParticleHelper;
 import chococraft.common.network.PacketHelper;
-import cpw.mods.fml.common.network.ByteBufUtils;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 
 /**
@@ -15,23 +15,23 @@ import io.netty.buffer.ByteBuf;
 public class ChocoboParticles implements IMessage {
 
 	public int entityID;
-	public String particleName;
+	public int particleID;
 	public int particleAmount;
 	public int dimensionId;
 
 	public ChocoboParticles() {}
 
-	public ChocoboParticles(EntityAnimalChocobo chocobo, String particleName, int particleAmount) {
+	public ChocoboParticles(EntityAnimalChocobo chocobo, EnumParticleTypes particleType, int particleAmount) {
 		this.entityID = chocobo.getEntityId();
-		this.particleName = particleName;
+		this.particleID = particleType.ordinal();
 		this.particleAmount = particleAmount;
-		this.dimensionId = chocobo.worldObj.provider.dimensionId;
+		this.dimensionId = chocobo.worldObj.provider.getDimensionId();
 	}
 
 	@Override
 	public void toBytes(ByteBuf buffer) {
 		buffer.writeInt(this.entityID);
-		ByteBufUtils.writeUTF8String(buffer, particleName);
+		buffer.writeInt(this.particleID);
 		buffer.writeInt(particleAmount);
 		buffer.writeInt(this.dimensionId);
 	}
@@ -39,7 +39,7 @@ public class ChocoboParticles implements IMessage {
 	@Override
 	public void fromBytes(ByteBuf buffer) {
 		this.entityID = buffer.readInt();
-		this.particleName = ByteBufUtils.readUTF8String(buffer);
+		this.particleID = buffer.readInt();
 		this.particleAmount = buffer.readInt();
 		this.dimensionId = buffer.readInt();
 	}
@@ -51,7 +51,7 @@ public class ChocoboParticles implements IMessage {
 			EntityAnimalChocobo chocobo = PacketHelper.getChocoboByID(message.entityID, message.dimensionId);
 			if(chocobo != null)
 			{
-				ChocoboParticleHelper.showParticleAroundEntityFx(message.particleName, chocobo, message.particleAmount);
+				ChocoboParticleHelper.showParticleAroundEntityFx(EnumParticleTypes.values()[message.particleID], chocobo, message.particleAmount);
 			}
 			return null;
 		}

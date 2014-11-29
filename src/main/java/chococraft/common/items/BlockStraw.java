@@ -2,18 +2,21 @@ package chococraft.common.items;
 
 import chococraft.common.config.ChocoCraftCreativeTabs;
 import chococraft.common.config.Constants;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
@@ -28,9 +31,10 @@ public class BlockStraw extends Block
 		this.setCreativeTab(ChocoCraftCreativeTabs.tabChococraft);
 		setStepSound(Block.soundTypeGrass);
 		setHardness(0.0F);
-		setBlockName("strawBlock");
+//TODO 1.8
+//		setBlockName("strawBlock");
     }
-    
+    /*
     @SideOnly(Side.CLIENT)
     @Override
     public IIcon getIcon(int i, int j)
@@ -42,18 +46,19 @@ public class BlockStraw extends Block
     public void registerBlockIcons(IIconRegister iconRegister)
     {
     	this.blockIcon = iconRegister.registerIcon(Constants.TCC_MODID + ":" + Constants.KEY_STRAW);
-    }
+    }*/
 
     /**
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+	/*
     @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
     {
     	return null;
     }
-
+*/
     /**
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
@@ -67,15 +72,16 @@ public class BlockStraw extends Block
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
-    @Override
+  /*  @Override
     public boolean renderAsNormalBlock()
     {
         return false;
     }
-
+*/
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+	/*
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
@@ -87,12 +93,12 @@ public class BlockStraw extends Block
     {
         this.canStrawStay(world, posX, posY, posZ);
     }
-    
-    private boolean canStrawStay(World world, int posX, int posY, int posZ)
+    */
+    private boolean canStrawStay(World world, BlockPos pos)
     {
-        if (!this.canPlaceBlockAt(world, posX, posY, posZ))
+        if (!this.canPlaceBlockAt(world, pos))
         {
-            world.setBlock(posX, posY, posZ, this, 0, 2);
+//            world.setBlock(pos, this, 0, 2);
             return false;
         }
         else
@@ -105,9 +111,9 @@ public class BlockStraw extends Block
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
     @Override
-    public boolean canPlaceBlockAt(World world, int posX, int posY, int posZ)
+    public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
-        Block block = world.getBlock(posX, posY - 1, posZ);
+        Block block = worldIn.getBlockState(pos.add(0, -1, 0)).getBlock();
         return block != null && (block.isOpaqueCube()) && block.getMaterial().blocksMovement();
     }
 
@@ -116,10 +122,11 @@ public class BlockStraw extends Block
      * block and l is the block's subtype/damage.
      */
     @Override
-    public void harvestBlock(World world, EntityPlayer player, int posX, int posY, int posZ, int blockDamage)
+    public void harvestBlock(World worldIn, EntityPlayer playerIn, BlockPos pos, IBlockState state, TileEntity te)
     {
-        super.harvestBlock(world, player, posX, posY, posZ, blockDamage);
-        world.setBlockToAir(posX, posY, posZ);
+
+        super.harvestBlock(worldIn, playerIn, pos, state, te);
+		worldIn.setBlockToAir(pos);
         //world.setBlock(posX, posY, posZ, this.blockID, 0, 2);
     }
 
@@ -133,20 +140,22 @@ public class BlockStraw extends Block
     }
     
     @Override
-    public int quantityDropped(int meta, int fortune, Random random)
+    public int quantityDropped(IBlockState state, int fortune, Random random)
     {
-        return (meta & 7) + 1;
+		return 1;
+//no bloody idea -.-'
+//        return (meta & 7) + 1;
     }
 
     /**
      * Ticks the block if it's been scheduled
      */
     @Override
-    public void updateTick(World world, int posX, int posY, int posZ, Random random)
+    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
-        if (world.getSavedLightValue(EnumSkyBlock.Block, posX, posY, posZ) > 11)
+        if (worldIn.getLightFor(EnumSkyBlock.BLOCK, pos) > 11)
         {
-            world.setBlock(posX, posY, posZ, this, 0, 2);
+//            world.setBlock(posX, posY, posZ, this, 0, 2);
         }
     }
 
@@ -156,8 +165,8 @@ public class BlockStraw extends Block
      */
     @SideOnly(Side.CLIENT)
     @Override
-    public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+	public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
     {
-        return par5 == 1 || super.shouldSideBeRendered(par1IBlockAccess, par2, par3, par4, par5);
+        return super.shouldSideBeRendered(worldIn, pos, side);
     }
 }

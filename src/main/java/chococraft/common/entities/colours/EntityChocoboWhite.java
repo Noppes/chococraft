@@ -112,9 +112,9 @@ public class EntityChocoboWhite extends EntityChocobo
 	}
 
 	@Override
-	protected void fall(float fallHeight)
+	public void fall(float fallHeight, float multiplier)
 	{
-		super.fall(fallHeight);
+		super.fall(fallHeight, multiplier);
 	}
 
 	@Override

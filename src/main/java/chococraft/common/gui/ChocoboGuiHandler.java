@@ -19,14 +19,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import chococraft.common.bags.ChocoBagContainer;
 import chococraft.common.entities.EntityChocobo;
-import cpw.mods.fml.common.network.IGuiHandler;
+import net.minecraftforge.fml.common.network.IGuiHandler;
 
 public class ChocoboGuiHandler implements IGuiHandler
 {
 	@Override
 	public Object getServerGuiElement(int id, EntityPlayer player, World world, int chocoboId, int saddleOrPack, int dummy)
 	{
-		EntityChocobo chocobo = this.getChocoboById(world, chocoboId, world.provider.dimensionId);
+		EntityChocobo chocobo = this.getChocoboById(world, chocoboId, world.provider.getDimensionId());
 		if(null != chocobo)
 		{
 			return new ChocoBagContainer(player.inventory, chocobo.getChocoBagInventory());
@@ -37,7 +37,7 @@ public class ChocoboGuiHandler implements IGuiHandler
 	@Override
 	public Object getClientGuiElement(int id, EntityPlayer player, World world, int chocoboId, int saddleOrPack, int dummy)
 	{
-		EntityChocobo chocobo = this.getChocoboById(world, chocoboId, world.provider.dimensionId);
+		EntityChocobo chocobo = this.getChocoboById(world, chocoboId, world.provider.getDimensionId());
 		if(null != chocobo)
 		{
 			return new GuiChocoboBag(player.inventory, chocobo.getChocoBagInventory());

@@ -83,7 +83,7 @@ public class ChocoboAIMate extends EntityAIBase
     {
         float f = 8.0F;
         @SuppressWarnings("rawtypes")
-		List list = this.theWorld.getEntitiesWithinAABB(EntityChocobo.class, this.theChocobo.boundingBox.expand((double)f, (double)f, (double)f));
+		List list = this.theWorld.getEntitiesWithinAABB(EntityChocobo.class, this.theChocobo.getBoundingBox().expand((double)f, (double)f, (double)f));
         double d0 = Double.MAX_VALUE;
         EntityChocobo chocobo = null;
 

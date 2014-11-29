@@ -102,9 +102,9 @@ public abstract class EntityChocobo extends EntityChocoboRideable
 	}
 	
 	@Override
-	protected void fall(float fallHeight)
+	public void fall(float fallHeight, float multiplier)
 	{
-		super.fall(fallHeight);
+		super.fall(fallHeight, multiplier);
 	}
 
 	abstract public String getEntityColourTexture();
@@ -467,8 +467,9 @@ public abstract class EntityChocobo extends EntityChocoboRideable
 		}
 	}
 
-	@Override
-	public void updateEntityActionState()
+	//TODO 1.8 - yell at lexy
+//	@Override
+	public void updateEntityActionState_fixme()
 	{
 		if(this instanceof EntityChocoboPurple)
 		{
@@ -497,7 +498,7 @@ public abstract class EntityChocobo extends EntityChocoboRideable
 					motionZ = motionZ * d1;
 				}
 				@SuppressWarnings("rawtypes")
-				List list = worldObj.getEntitiesWithinAABBExcludingEntity(this.riddenByEntity, boundingBox.expand(1.0D, 1.0D, 1.0D));
+				List list = worldObj.getEntitiesWithinAABBExcludingEntity(this.riddenByEntity, getBoundingBox().expand(1.0D, 1.0D, 1.0D));
 				if (list != null)
 				{
 					for (Object aList : list) {
@@ -528,7 +529,8 @@ public abstract class EntityChocobo extends EntityChocoboRideable
 					float distanceToOwner = owner.getDistanceToEntity(this);
 					if (distanceToOwner > 10F)
 					{
-						this.getPathOrWalkableBlock(owner, distanceToOwner);
+						//TODO 1.8
+//						this.getPathOrWalkableBlock(owner, distanceToOwner);
 					}
 					else
 					{

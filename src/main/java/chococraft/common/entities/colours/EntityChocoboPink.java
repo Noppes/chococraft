@@ -113,7 +113,7 @@ public class EntityChocoboPink extends EntityChocobo
 	}
 
 	@Override
-	protected void fall(float fallHeight)
+	public void fall(float fallHeight, float multiplier)
 	{
 	}
 

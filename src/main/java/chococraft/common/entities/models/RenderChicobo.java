@@ -17,6 +17,7 @@ package chococraft.common.entities.models;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -27,9 +28,9 @@ import chococraft.common.entities.EntityChicobo;
 
 public class RenderChicobo extends RenderLiving
 {
-    public RenderChicobo(ModelBase modelbase, float f)
+    public RenderChicobo(RenderManager manager, ModelBase modelbase, float f)
     {
-        super(modelbase, f);
+        super(manager, modelbase, f);
     }
 
     public void renderChicobo(EntityChicobo entitychicobo, double d, double d1, double d2,
@@ -39,7 +40,7 @@ public class RenderChicobo extends RenderLiving
         if (entitychicobo.canRenderName())
         {
         	String tmpName = entitychicobo.getName();
-            super.func_147906_a(entitychicobo, tmpName, d, d1, d2, 20);//renderLivingLabel
+            super.renderLivingLabel(entitychicobo, tmpName, d, d1, d2, 20);//renderLivingLabel
         }
     }
 

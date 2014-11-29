@@ -17,6 +17,7 @@ package chococraft.common.entities.spawner;
 import java.util.ArrayList;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -142,12 +143,17 @@ public final class ChocoboSpawner
 				if(ChocoboBiomeHelper.isWorldHell(world))
 				{
 					//chocoPosY = world.getFirstUncoveredBlock(chocoPosX, chocoPosZ);//shouldn't work anyway, this returned block id
-					chocoPosY = world.getTopSolidOrLiquidBlock(chocoPosX, chocoPosZ);
+					//TODO 1.8
+					//chocoPosY = world.getTopSolidOrLiquidBlock(chocoPosX, chocoPosZ);
 				}
 				else
 				{
-					chocoPosY = world.getTopSolidOrLiquidBlock(chocoPosX, chocoPosZ);
+					//TODO 1.8
+					//chocoPosY = world.getTopSolidOrLiquidBlock(chocoPosX, chocoPosZ);
 				}
+
+				//TODO 1.8 - temp
+				chocoPosY = 60;
 
 				int chocoRotYawn = world.rand.nextInt(360);
 
@@ -191,7 +197,7 @@ public final class ChocoboSpawner
 		{
 			for(int posZ = posZ_0 - chunkRadius; posZ <= posZ_0 + chunkRadius; posZ++)
 			{
-				Chunk tmpChunk = world.getChunkFromBlockCoords(posX, posZ);
+				Chunk tmpChunk = world.getChunkFromBlockCoords(new BlockPos(posX, 0, posZ));
 				targetChunks.add(tmpChunk);
 			}
 		}
@@ -203,7 +209,7 @@ public final class ChocoboSpawner
 			{
 				if(!((EntityChocobo)entity).isTamed())
 				{
-					Chunk entityChunk = world.getChunkFromBlockCoords(MathHelper.floor_double(entity.posX), MathHelper.floor_double(entity.posZ));
+					Chunk entityChunk = world.getChunkFromBlockCoords(new BlockPos(MathHelper.floor_double(entity.posX),0 , MathHelper.floor_double(entity.posZ)));
 					if(targetChunks.contains(entityChunk))
 					{
 						amount++;
@@ -223,12 +229,16 @@ public final class ChocoboSpawner
 		if(ChocoboBiomeHelper.isWorldHell(world))
 		{
 			//tmpPosY = world.getFirstUncoveredBlock(tmpPosX, tmpPosZ);
-			tmpPosY = world.getTopSolidOrLiquidBlock(tmpPosX, tmpPosZ);
+//TODO 1.8
+			//			tmpPosY = world.getTopSolidOrLiquidBlock(tmpPosX, tmpPosZ);
 		}
 		else
 		{
-			tmpPosY = world.getTopSolidOrLiquidBlock(tmpPosX, tmpPosZ);
+//TODO 1.8
+			//			tmpPosY = world.getTopSolidOrLiquidBlock(tmpPosX, tmpPosZ);
 		}
+		//TODO 1.8 - temp
+		tmpPosY = 70;
 
 		return world.getClosestPlayer(tmpPosX, tmpPosY, tmpPosZ, distance) != null;
 	}
@@ -248,7 +258,7 @@ public final class ChocoboSpawner
 		}
 		
 		//Boolean notLiquidCube = !world.getBlockMaterial(posX, posY, posZ).isLiquid();
-		if(world.getBlock(posX, posY, posZ).getMaterial().isLiquid())
+		if(world.getBlockState(new BlockPos(posX, posY, posZ)).getBlock().getMaterial().isLiquid())
 		{
 			return false;
 		}
@@ -271,7 +281,7 @@ public final class ChocoboSpawner
 		{
 			for(int z = posZ -1; z <= posZ +1; z++)
 			{
-				if(!world.getBlock(x, posY, z).isNormalCube())
+				if(!world.getBlockState(new BlockPos(x, posY, z)).getBlock().isNormalCube())
 				{
 					return false;
 				}
@@ -284,7 +294,7 @@ public final class ChocoboSpawner
 	{
 		int intPosX = MathHelper.floor_double(posX);
 		int intPosZ = MathHelper.floor_double(posZ);		
-		BiomeGenBase chocoBgb = world.getBiomeGenForCoords(intPosX, intPosZ);
+		BiomeGenBase chocoBgb = world.getBiomeGenForCoords(new BlockPos(intPosX, 0, intPosZ));
 		if(null != ModChocoCraft.spawnBiomes)
 		{
 			for (int i = 0; i < ModChocoCraft.spawnBiomes.length; i++) {

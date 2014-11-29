@@ -67,8 +67,8 @@ public abstract class EntityChocoboRideable extends EntityAnimalChocobo
 		super.entityInit();
 		this.dataWatcher.addObject(Constants.DW_ID_ECR_FLAGS, (byte) 0);
 	}
-
-    @Override
+	//TODO 1.8
+//    @Override
 	public boolean isAIEnabled()
 	{
 		return this.riddenByEntity == null;

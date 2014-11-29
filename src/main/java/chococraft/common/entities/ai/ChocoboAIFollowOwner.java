@@ -63,8 +63,11 @@ public class ChocoboAIFollowOwner extends EntityAIBase
 	public void startExecuting()
 	{
 		this.followDelay = 0;
+		//TODO 1.8
+		/*
 		this.chocoboAvoidsWater = this.chocobo.getNavigator().getAvoidsWater();
 		this.chocobo.getNavigator().setAvoidsWater(false);
+		*/
 		this.originalStepHight = this.chocobo.stepHeight;
 		if(this.chocobo.stepHeight < 1.0F)
 		{
@@ -86,7 +89,8 @@ public class ChocoboAIFollowOwner extends EntityAIBase
 	public void resetTask()
 	{
 		this.chocobo.getNavigator().clearPathEntity();
-		this.chocobo.getNavigator().setAvoidsWater(this.chocoboAvoidsWater);
+		//TODO 1.8
+		//this.chocobo.getNavigator().setAvoidsWater(this.chocoboAvoidsWater);
 		this.chocobo.stepHeight = this.originalStepHight;
 	}
 
