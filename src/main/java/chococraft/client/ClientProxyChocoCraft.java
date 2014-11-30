@@ -77,7 +77,7 @@ public class ClientProxyChocoCraft extends CommonProxyChocoCraft
 			renderItem.getItemModelMesher().register(ChocoCraftItems.chocoboFeatherItem, new ItemMeshDefinition() {
 				public ModelResourceLocation getModelLocation(ItemStack stack)
 				{
-					return new ModelResourceLocation(Constants.TCC_MODID + ":" + ChocoCraftBlocks.strawBlock.getUnlocalizedName().substring(5), null);
+					return new ModelResourceLocation(Constants.TCC_MODID + ":" + ChocoCraftItems.chocoboFeatherItem.getUnlocalizedName().substring(5), null);
 				}
 			});
 		}
