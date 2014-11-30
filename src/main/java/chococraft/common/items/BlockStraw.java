@@ -31,8 +31,7 @@ public class BlockStraw extends Block
 		this.setCreativeTab(ChocoCraftCreativeTabs.tabChococraft);
 		setStepSound(Block.soundTypeGrass);
 		setHardness(0.0F);
-//TODO 1.8
-//		setBlockName("strawBlock");
+		setUnlocalizedName("strawBlock");
     }
     /*
     @SideOnly(Side.CLIENT)

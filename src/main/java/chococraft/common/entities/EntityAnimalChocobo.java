@@ -49,6 +49,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 public abstract class EntityAnimalChocobo extends EntityTameable implements IEntityAdditionalSpawnData
 {
@@ -416,37 +417,36 @@ public abstract class EntityAnimalChocobo extends EntityTameable implements IEnt
 	@Override
 	public EntityPlayer getOwner()
     {
-		EntityPlayer owner = this.worldObj.getPlayerEntityByName(this.func_152113_b());//getOwnerName
-		if(null == owner)
-		{
+		if(1 == 1)
+			return null;//FIXME
+		try {
+			EntityPlayer owner = this.worldObj.getPlayerEntityByUUID(UUID.fromString(this.getOwnerId()));//getOwnerName
+			if (null == owner) {
 
-			if(this.worldObj.playerEntities.size() == 1)
-			{
-				if(this.func_152113_b().equals("Player"))//getOwnerName
-				{
-					Object playerObj = this.worldObj.playerEntities.get(0);
-					if(playerObj instanceof EntityPlayer)
+				if (this.worldObj.playerEntities.size() == 1) {
+					if (this.getOwner().getName().equals("Player"))//getOwnerName
 					{
-						EntityPlayer updatedOwner = (EntityPlayer)playerObj;
-						this.func_152115_b(updatedOwner.getDisplayName().getUnformattedText());//setOwner
-						owner = updatedOwner;
-					}
-				}
-				else
-				{
-					Object playerObj = this.worldObj.playerEntities.get(0);
-					if(playerObj instanceof EntityPlayer)
-					{
-						EntityPlayer offlinePlayer = (EntityPlayer)playerObj;
-						if(offlinePlayer.getDisplayName().equals("Player"))
-						{
-							owner = offlinePlayer;	
+						Object playerObj = this.worldObj.playerEntities.get(0);
+						if (playerObj instanceof EntityPlayer) {
+							EntityPlayer updatedOwner = (EntityPlayer) playerObj;
+							this.setOwnerId(updatedOwner.getUniqueID().toString());//setOwner
+							owner = updatedOwner;
+						}
+					} else {
+						Object playerObj = this.worldObj.playerEntities.get(0);
+						if (playerObj instanceof EntityPlayer) {
+							EntityPlayer offlinePlayer = (EntityPlayer) playerObj;
+							if (offlinePlayer.getDisplayName().equals("Player")) {
+								owner = offlinePlayer;
+							}
 						}
 					}
 				}
 			}
-		}		
-		return owner;
+			return owner;
+		} catch(Exception e) {//TODO fix
+			return null;
+		}
     }
 	
 	public boolean isOwner(EntityPlayer player)
@@ -614,7 +614,7 @@ public abstract class EntityAnimalChocobo extends EntityTameable implements IEnt
     				this.setFollowing(false);
     				this.setHidename(true);
     				this.worldObj.setEntityState(this, (byte)7);
-    				this.func_152115_b(entityplayer.getDisplayName().getUnformattedText());//setOwner
+    				this.setOwnerId(entityplayer.getUniqueID().toString());//setOwner
     				this.sendTamedUpdate();
     			}
     			else
@@ -649,7 +649,7 @@ public abstract class EntityAnimalChocobo extends EntityTameable implements IEnt
 
 	//TODO 1.8
 //    @Override
-	protected void attackEntity(Entity entity, float targetDistance)
+	protected void attackEntityFrom(Entity entity, float targetDistance)
     {
     	if (entity instanceof EntityAnimalChocobo)
         {
@@ -824,7 +824,7 @@ return true;	}
     
     public void changeOwner(String newOwner)
     {
-    	this.func_152115_b(newOwner);//setOwner
+    	this.setOwnerId(newOwner);//setOwner
     	this.sendChangeOwnerUpdate();
     }
 

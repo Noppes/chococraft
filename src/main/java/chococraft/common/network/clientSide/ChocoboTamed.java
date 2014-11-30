@@ -51,7 +51,7 @@ public class ChocoboTamed implements IMessage {
 			if(chicobo != null)
 			{
 				chicobo.setTamed(message.isTamed);
-				chicobo.func_152115_b(message.ownerName);//setowner
+				chicobo.setOwnerId(message.ownerName);//setowner
 			}
 			return null;
 		}

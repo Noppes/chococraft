@@ -22,7 +22,7 @@ public class ChocoboChangeOwner implements IMessage {
 
 	public ChocoboChangeOwner(EntityAnimalChocobo chocobo) {
 		this.entityID = chocobo.getEntityId();
-		this.ownerName = chocobo.func_152113_b();
+		this.ownerName = chocobo.getOwner().getName();
 		this.isTamed = chocobo.isTamed();
 		this.dimensionId = chocobo.worldObj.provider.getDimensionId();
 	}
@@ -52,7 +52,7 @@ public class ChocoboChangeOwner implements IMessage {
 			{
 				if(message.isTamed)
 				{//setowner
-					chocobo.func_152115_b(message.ownerName);
+					chocobo.setOwnerId(message.ownerName);
 				}
 			}
 			return null;

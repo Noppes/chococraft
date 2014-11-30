@@ -14,6 +14,9 @@
 
 package chococraft.common.items;
 
+import chococraft.common.ModChocoCraft;
+import chococraft.common.config.ChocoCraftCreativeTabs;
+import chococraft.common.gui.ChocoboCreativeTab;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,7 +30,7 @@ public class ChocoboItem extends Item
 {
 	public ChocoboItem()
 	{
-		//this.setCreativeTab(ModChocoCraft.chocoboCreativeItems);
+		this.setCreativeTab(ChocoCraftCreativeTabs.tabChococraft);
 //		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(this, 0, new ModelResourceLocation(Constants.TCC_MODID + ":" + this.getUnlocalizedName().substring(5), "inventory"));
 	}
 

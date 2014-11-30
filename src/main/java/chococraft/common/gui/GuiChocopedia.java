@@ -259,7 +259,7 @@ public class GuiChocopedia extends GuiScreen
 			@SuppressWarnings("UnusedAssignment")
 			String breedStatus = "";
 			String gender = this.chocobo.getGender();
-			String ownerName = (new StringBuilder()).append("owner: ").append(this.chocobo.func_152113_b()).toString();//getOwnerName
+			String ownerName = (new StringBuilder()).append("owner: ").append(this.chocobo.getOwner().getName()).toString();//getOwnerName
 			String hungry = chocobo.isHungry() ? " (hungry)" : "";
 			String health = (new StringBuilder()).append("health: ").append(chocobo.getHealth()).append("/").append(chocobo.getMaxHealth()).append(hungry).toString();
 
@@ -282,7 +282,7 @@ public class GuiChocopedia extends GuiScreen
 			this.drawString(this.mc.fontRendererObj, health,      posX, (posY += 24), fontColour);
 			this.drawString(this.mc.fontRendererObj, gender + " (" + breedStatus + ")",      posX, (posY += 24), fontColour);
 
-			if(this.chocobo.func_152113_b().equals("Torojima") || this.chocobo.func_152113_b().equals("clienthax"))//getOwnerName
+			if(this.chocobo.getOwner().getName().equals("Torojima") || this.chocobo.getOwner().getName().equals("clienthax"))//getOwnerName
 			{
 				// it's me, display debug information
 				int debugLineHeight = 13;

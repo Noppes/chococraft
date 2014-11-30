@@ -26,9 +26,10 @@ sourceCompatibility = 1.6
 targetCompatibility = 1.6
 
 minecraft {
-    version = "1.8-11.14.0.1239-1.8"
+    version = "1.8-11.14.0.1245-1.8"
     runDir = "run"
     replace "@VERSION@", project.version
+    mappings = "snapshot_nodoc_20141129"
 }
 
 task deobfJar(type: Jar) {
