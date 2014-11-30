@@ -68,8 +68,19 @@ public class ClientProxyChocoCraft extends CommonProxyChocoCraft
 		ModelBakery.addVariantName(Item.getItemFromBlock(ChocoCraftBlocks.strawBlock), Constants.TCC_MODID + ":" + ChocoCraftBlocks.strawBlock.getUnlocalizedName().substring(5));
 		registerItemTexture(Item.getItemFromBlock(ChocoCraftBlocks.strawBlock), Constants.TCC_MODID + ":" + ChocoCraftBlocks.strawBlock.getUnlocalizedName().substring(5));
 
-		ModelBakery.addVariantName(ChocoCraftItems.chocoboFeatherItem, Constants.TCC_MODID + ":" + ChocoCraftBlocks.strawBlock.getUnlocalizedName().substring(5));
-		registerItemTexture(ChocoCraftItems.chocoboFeatherItem, Constants.TCC_MODID + ":" + ChocoCraftBlocks.strawBlock.getUnlocalizedName().substring(5));
+		//ModelBakery.addVariantName(ChocoCraftItems.chocoboFeatherItem, Constants.TCC_MODID + ":" + ChocoCraftBlocks.strawBlock.getUnlocalizedName().substring(5));
+		//registerItemTexture(ChocoCraftItems.chocoboFeatherItem, Constants.TCC_MODID + ":" + ChocoCraftBlocks.strawBlock.getUnlocalizedName().substring(5));
+
+		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
+		if(renderItem != null)
+		{
+			renderItem.getItemModelMesher().register(ChocoCraftItems.chocoboFeatherItem, new ItemMeshDefinition() {
+				public ModelResourceLocation getModelLocation(ItemStack stack)
+				{
+					return new ModelResourceLocation(Constants.TCC_MODID + ":" + ChocoCraftBlocks.strawBlock.getUnlocalizedName().substring(5), null);
+				}
+			});
+		}
 
     }
 
