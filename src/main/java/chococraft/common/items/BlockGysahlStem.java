@@ -176,8 +176,9 @@ public class BlockGysahlStem extends BlockBush implements ISimpleTextureHelper
 
     @Override
     public Item getItemDropped(IBlockState state, Random random, int fortune)
-    {
+    {//TODO why is stage returning 0 when its fully grown?
 		int gysahlStage = ((Integer)state.getValue(STAGE)).intValue();
+		System.out.println(gysahlStage);
 		if(gysahlStage == 4)
 		{
 			if(random.nextInt(1000) > ModChocoCraft.gysahlGreenMutationRate)
@@ -210,7 +211,7 @@ public class BlockGysahlStem extends BlockBush implements ISimpleTextureHelper
 		if(stage < MAX_STAGE)
 		{//TODO is this right 1.8 stuff?
 			IBlockState state = theWorld.getBlockState(position).withProperty(STAGE, MAX_STAGE);
-			theWorld.setBlockState(position, state);
+			theWorld.setBlockState(position, state, 2);
 			return true;
 		}
 		else
