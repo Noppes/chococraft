@@ -50,7 +50,7 @@ public class ChocoCraftEventCommon
 	@SubscribeEvent
 	public void onUseBonemeal(BonemealEvent event)
 	{
-		if (event.block.equals(ChocoCraftBlocks.gysahlStemBlock))
+		if (event.block.getBlock().equals(ChocoCraftBlocks.gysahlStemBlock))
 		{
 			if (((BlockGysahlStem) ChocoCraftBlocks.gysahlStemBlock).onBonemealUse(event.world, event.pos))
 			{

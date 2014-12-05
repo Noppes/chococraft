@@ -1,6 +1,6 @@
 {
     "parent": "block/cross",
     "textures": {
-        "all": "chococraft:blocks/gysahl_stem04"
+        "cross": "chococraft:blocks/gysahl_stem04"
     }
 }
