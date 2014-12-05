@@ -1,5 +1,6 @@
 package chococraft.common.config;
 
+import chococraft.common.ModChocoCraft;
 import chococraft.common.items.BlockGysahlGreen;
 import chococraft.common.items.BlockGysahlStem;
 import chococraft.common.items.BlockStraw;

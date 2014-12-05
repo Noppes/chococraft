@@ -17,7 +17,9 @@ package chococraft.common.proxy;
 import chococraft.common.entities.EntityChocoboRideable;
 import chococraft.common.entities.RiderActionState;
 import chococraft.common.events.ChocoCraftEventCommon;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 
 public class CommonProxyChocoCraft
@@ -50,4 +52,8 @@ public class CommonProxyChocoCraft
 	{
 		return null;
 	}
+
+	public void registerItemTexture(final Item item) {}
+
+	public void registerBlockTexture(final Block block) {}
 }

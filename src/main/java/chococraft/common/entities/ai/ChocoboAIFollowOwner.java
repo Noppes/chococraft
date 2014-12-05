@@ -3,6 +3,7 @@ package chococraft.common.entities.ai;
 import chococraft.common.entities.colours.EntityChocoboYellow;
 import net.minecraft.entity.ai.EntityAIBase;
 import chococraft.common.entities.EntityAnimalChocobo;
+import net.minecraft.pathfinding.PathNavigateGround;
 
 public class ChocoboAIFollowOwner extends EntityAIBase
 {
@@ -63,11 +64,8 @@ public class ChocoboAIFollowOwner extends EntityAIBase
 	public void startExecuting()
 	{
 		this.followDelay = 0;
-		//TODO 1.8
-		/*
-		this.chocoboAvoidsWater = this.chocobo.getNavigator().getAvoidsWater();
-		this.chocobo.getNavigator().setAvoidsWater(false);
-		*/
+		this.chocoboAvoidsWater = ((PathNavigateGround)this.chocobo.getNavigator()).func_179689_e();//getAvoidsWater
+		((PathNavigateGround)this.chocobo.getNavigator()).func_179690_a(false);//setAvoidsWater
 		this.originalStepHight = this.chocobo.stepHeight;
 		if(this.chocobo.stepHeight < 1.0F)
 		{
@@ -89,8 +87,7 @@ public class ChocoboAIFollowOwner extends EntityAIBase
 	public void resetTask()
 	{
 		this.chocobo.getNavigator().clearPathEntity();
-		//TODO 1.8
-		//this.chocobo.getNavigator().setAvoidsWater(this.chocoboAvoidsWater);
+		((PathNavigateGround)this.chocobo.getNavigator()).func_179690_a(this.chocoboAvoidsWater);//setAvoidsWater
 		this.chocobo.stepHeight = this.originalStepHight;
 	}
 

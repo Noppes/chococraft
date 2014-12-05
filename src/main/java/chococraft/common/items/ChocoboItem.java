@@ -17,6 +17,7 @@ package chococraft.common.items;
 import chococraft.common.ModChocoCraft;
 import chococraft.common.config.ChocoCraftCreativeTabs;
 import chococraft.common.gui.ChocoboCreativeTab;
+import chococraft.common.items.helper.ISimpleTextureHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,12 +27,13 @@ import net.minecraft.world.World;
 import chococraft.common.config.Constants;
 
 
-public class ChocoboItem extends Item
+public class ChocoboItem extends Item implements ISimpleTextureHelper
 {
+	ModelResourceLocation modelResourceLocation = null;
+
 	public ChocoboItem()
 	{
 		this.setCreativeTab(ChocoCraftCreativeTabs.tabChococraft);
-//		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(this, 0, new ModelResourceLocation(Constants.TCC_MODID + ":" + this.getUnlocalizedName().substring(5), "inventory"));
 	}
 
 	@Override
@@ -39,5 +41,14 @@ public class ChocoboItem extends Item
 	{
 		super.onItemRightClick(itemStack, world, player);		
 		return itemStack;
+	}
+
+	public void setDefaultModelLocation() {
+		modelResourceLocation = new ModelResourceLocation(Constants.TCC_MODID + ":" + this.getUnlocalizedName().substring(5), "inventory");
+	}
+
+	@Override
+	public ModelResourceLocation getDefaultModelLocation() {
+		return modelResourceLocation;
 	}
 }

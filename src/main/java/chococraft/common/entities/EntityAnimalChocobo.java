@@ -29,6 +29,8 @@ import chococraft.common.network.clientSide.*;
 import chococraft.common.network.serverSide.ChocoboAttribute;
 import chococraft.common.network.serverSide.ChocoboChangeOwner;
 import chococraft.common.network.serverSide.ChocoboSetInLove;
+import net.minecraft.block.BlockCauldron;
+import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.*;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -88,7 +90,6 @@ public abstract class EntityAnimalChocobo extends EntityTameable implements IEnt
 	public EntityAnimalChocobo(World world)
     {
         super(world);
-        //this.dataWatcher.addObject(DW_ID_EAC_HEALTH, new Integer(this.getHealth()));
         this.hasAttacked = false;
         this.fleeingTick = 0;
         this.breeding = 0;
@@ -97,8 +98,7 @@ public abstract class EntityAnimalChocobo extends EntityTameable implements IEnt
         this.setTamed(false);
         this.setFollowing(false);
         this.setIsMale(this.getRandomIsMale());
-		//TODO 1.8
-//        this.getNavigator().setAvoidsWater(true);
+		((PathNavigateGround)this.getNavigator()).func_179690_a(true);//setAvoidsWater - func_179690_a
 		this.hasMate = false;
         
 		this.tasks.addTask(this.taskNumber++, new ChocoboAISwimming(this));
@@ -418,7 +418,7 @@ public abstract class EntityAnimalChocobo extends EntityTameable implements IEnt
 	public EntityPlayer getOwner()
     {
 		if(1 == 1)
-			return null;//FIXME
+			return null;//FIXME - 1.8
 		try {
 			EntityPlayer owner = this.worldObj.getPlayerEntityByUUID(UUID.fromString(this.getOwnerId()));//getOwnerName
 			if (null == owner) {
@@ -532,14 +532,9 @@ public abstract class EntityAnimalChocobo extends EntityTameable implements IEnt
 			{
 				if(this.worldObj.getBlockState(new BlockPos(x, posY, z)).getBlock().equals(Blocks.cauldron))
 				{
-					//TODO 1.8
-	/*
-		            int fillStatus = this.worldObj.getBlockMetadata(x, posY, z);
-		            if(fillStatus > 0)
-		            {
-		            	return true;
-		            }
-*/				}
+					boolean filled = ((Integer)this.worldObj.getBlockState(new BlockPos(x,posY,z)).getValue(BlockCauldron.LEVEL)).intValue() == 3;
+					return filled;
+				}
 			}
 		}
 		return false;
@@ -776,11 +771,9 @@ public abstract class EntityAnimalChocobo extends EntityTameable implements IEnt
         int x = MathHelper.floor_double(this.posX);
         int y = MathHelper.floor_double(this.getBoundingBox().minY);
         int z = MathHelper.floor_double(this.posZ);
-		//TODO 1.8
-/*        Boolean isPosPathWeight = getBlockPathWeight(x, y, z) >= 0.0F;
+		boolean isPosPathWeight = func_180484_a(this.getPosition()) > 0.0F;//getBlockPathWeight
         return  isPosPathWeight && super.getCanSpawnHere();
-*/
-return true;	}
+	}
     
     public boolean canSpawnAtLoc(int x, int y, int z)
     {

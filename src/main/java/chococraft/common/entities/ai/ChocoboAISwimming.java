@@ -2,6 +2,7 @@ package chococraft.common.entities.ai;
 
 import net.minecraft.entity.ai.EntityAIBase;
 import chococraft.common.entities.EntityAnimalChocobo;
+import net.minecraft.pathfinding.PathNavigateGround;
 
 public class ChocoboAISwimming extends EntityAIBase
 {
@@ -12,8 +13,7 @@ public class ChocoboAISwimming extends EntityAIBase
 	{
         this.setMutexBits(4);
         this.chocobo = chocobo;
-		//TODO 1.8
-//        this.chocobo.getNavigator().setCanSwim(true);
+		((PathNavigateGround)this.chocobo.getNavigator()).func_179693_d(true);//setCanSwim
 	}
 	
 	/**

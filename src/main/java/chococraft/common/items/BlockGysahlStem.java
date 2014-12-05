@@ -19,9 +19,12 @@ import chococraft.common.config.ChocoCraftBlocks;
 import chococraft.common.config.ChocoCraftCreativeTabs;
 import chococraft.common.config.ChocoCraftItems;
 import chococraft.common.config.Constants;
+import chococraft.common.items.helper.ISimpleTextureHelper;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -37,11 +40,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
-public class BlockGysahlStem extends BlockBush
+public class BlockGysahlStem extends BlockBush implements ISimpleTextureHelper
 {
-	static final int MAX_STAGE = 4;
+	static private final int MAX_STAGE = 4;
 	public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, MAX_STAGE);
-//	private ArrayList<IIcon> icons;
+	private ModelResourceLocation defaultModelLocation;
 	
 	public BlockGysahlStem()
     {
@@ -53,52 +56,43 @@ public class BlockGysahlStem extends BlockBush
         this.setStepSound(soundTypeGrass);
 		setHardness(0f);
 		setUnlocalizedName("gysahlStemBlock");
-    }
-/*
-    @SideOnly(Side.CLIENT)
-    @Override
-    public IIcon getIcon(int i, int j)
-	{
-    	if(j < this.icons.size())
-    	{
-        	return this.icons.get(j);    		
-    	}
-    	return this.icons.get(4);
-	}*/
+		defaultModelLocation = new ModelResourceLocation(Constants.TCC_MODID + ":" + "gyshal_stem01", "inventory");
+		this.setDefaultState(this.blockState.getBaseState().withProperty(STAGE, Integer.valueOf(0)));
+	}
 
-    /*
-    @Override
-    public void registerBlockIcons(IIconRegister iconRegister)
-    {
-    	this.icons = new ArrayList<IIcon>();
-    	this.icons.add(0, iconRegister.registerIcon(Constants.TCC_MODID + ":" + Constants.KEY_GY_STEM01));
-    	this.icons.add(1, iconRegister.registerIcon(Constants.TCC_MODID + ":" + Constants.KEY_GY_STEM02));
-    	this.icons.add(2, iconRegister.registerIcon(Constants.TCC_MODID + ":" + Constants.KEY_GY_STEM03));
-    	this.icons.add(3, iconRegister.registerIcon(Constants.TCC_MODID + ":" + Constants.KEY_GY_STEM04));
-    	this.icons.add(4, iconRegister.registerIcon(Constants.TCC_MODID + ":" + Constants.KEY_GY_STEM05));
-    }
-	*/
+	@Override
+	public IBlockState getStateFromMeta(int meta)
+	{//eah..
+		return this.getDefaultState().withProperty(STAGE, Integer.valueOf(meta));
+	}
+	public int getMetaFromState(IBlockState state)
+	{
+		return ((Integer)state.getValue(STAGE)).intValue();
+	}
+
+
+	@Override
+	protected BlockState createBlockState()
+	{
+		return new BlockState(this, new IProperty[] {STAGE});
+	}
+
     @Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         super.updateTick(worldIn, pos, state, rand);
-//TODO 1.8
-/*        if (worldIn.getBlockLightValue(xPos, yPos + 1, zPos) >= 9)
-        {
-            int gysahlStage = worldIn.getBlockMetadata(xPos, yPos, zPos);
 
-            if (gysahlStage < MAX_STAGE)
-            {
-                float f = getGrowthRate(theWorld, xPos, yPos, zPos);
-
-                if (randInts.nextInt((int)(25F / f) + 1) == 0)
-                {
-                    gysahlStage++;
-                    worldIn.setBlockMetadataWithNotify(xPos, yPos, zPos, gysahlStage, 2);
-                }
-            }
-        }
-*/    }
+		if(worldIn.getLightFromNeighbors(pos) >= 9) {
+			int gysahlStage = ((Integer)state.getValue(STAGE)).intValue();
+			if( gysahlStage < MAX_STAGE) {
+				float growthRate = getGrowthRate(worldIn, pos.getX(), pos.getX(), pos.getZ());
+				if(rand.nextInt((int)(25F / growthRate) + 1) == 0) {
+					gysahlStage++;
+					worldIn.setBlockState(pos, state.cycleProperty(STAGE), 2);
+				}
+			}
+		}
+    }
 	
 	private float getGrowthRate(World theWorld, int xPos, int yPos, int zPos)
     {
@@ -165,12 +159,11 @@ public class BlockGysahlStem extends BlockBush
     		int j1 = 3 + fortune;
     		for (int k1 = 0; k1 < j1; k1++)
     		{
-				//TODO 1.8 - i don't even..
-/*    			if (world.rand.nextInt(15) > l)//err..
-    			{
-    				continue;
-    			}
-*/    			float f1 = 0.7F;
+				if(world.rand.nextInt(15) > 1)
+				{
+					continue;
+				}
+				float f1 = 0.7F;
     			float f2 = world.rand.nextFloat() * f1 + (1.0F - f1) * 0.5F;
     			float f3 = world.rand.nextFloat() * f1 + (1.0F - f1) * 0.5F;
     			float f4 = world.rand.nextFloat() * f1 + (1.0F - f1) * 0.5F;
@@ -184,30 +177,29 @@ public class BlockGysahlStem extends BlockBush
     @Override
     public Item getItemDropped(IBlockState state, Random random, int fortune)
     {
-		//TODO 1.8
-		/*
-    	if (state == 4)
-    	{
-    		if(random.nextInt(1000) > ModChocoCraft.gysahlGreenMutationRate)
-    		{
-    			return Item.getItemFromBlock(ChocoCraftBlocks.gysahlGreenBlock);
-    		}
-    		else 
-    		{
-    			if(random.nextInt(1000) > ModChocoCraft.gysahlLoveMutationRate)
-    			{
-    				return ChocoCraftItems.gysahlLoverlyItem;
-    			}
-    			else
-    			{
-    				return ChocoCraftItems.gysahlGoldenItem;
-    			}
-    		}
-    	}
-    	else
-        {*/
-            return null;
-//        }
+		int gysahlStage = ((Integer)state.getValue(STAGE)).intValue();
+		if(gysahlStage == 4)
+		{
+			if(random.nextInt(1000) > ModChocoCraft.gysahlGreenMutationRate)
+			{
+				return Item.getItemFromBlock(ChocoCraftBlocks.gysahlGreenBlock);
+			}
+			else
+			{
+				if(random.nextInt(1000) > ModChocoCraft.gysahlLoveMutationRate)
+				{
+					return ChocoCraftItems.gysahlLoverlyItem;
+				}
+				else
+				{
+					return ChocoCraftItems.gysahlGoldenItem;
+				}
+			}
+		}
+		else
+		{
+			return null;
+		}
     }
 
 
@@ -216,7 +208,7 @@ public class BlockGysahlStem extends BlockBush
 	{
 		int stage = ((Integer)theWorld.getBlockState(position).getValue(STAGE)).intValue();
 		if(stage < MAX_STAGE)
-		{
+		{//TODO is this right 1.8 stuff?
 			IBlockState state = theWorld.getBlockState(position).withProperty(STAGE, MAX_STAGE);
 			theWorld.setBlockState(position, state);
 			return true;
@@ -225,5 +217,10 @@ public class BlockGysahlStem extends BlockBush
 		{
 			return false;
 		}
-	}	
+	}
+
+	@Override
+	public ModelResourceLocation getDefaultModelLocation() {
+		return defaultModelLocation;
+	}
 }

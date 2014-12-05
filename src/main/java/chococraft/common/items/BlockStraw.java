@@ -1,7 +1,9 @@
 package chococraft.common.items;
 
 import chococraft.common.config.ChocoCraftCreativeTabs;
+import chococraft.common.config.ChocoCraftItems;
 import chococraft.common.config.Constants;
+import chococraft.common.items.helper.ISimpleTextureHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -22,8 +24,10 @@ import java.util.Random;
 
 
 
-public class BlockStraw extends Block
+public class BlockStraw extends Block implements ISimpleTextureHelper
 {
+	ModelResourceLocation modelResourceLocation = null;
+
     public BlockStraw()
     {
         super(Material.circuits);
@@ -32,32 +36,14 @@ public class BlockStraw extends Block
 		setStepSound(Block.soundTypeGrass);
 		setHardness(0.0F);
 		setUnlocalizedName("strawBlock");
+		modelResourceLocation = new ModelResourceLocation(Constants.TCC_MODID + ":" + this.getUnlocalizedName().substring(5), "inventory");
     }
-    /*
-    @SideOnly(Side.CLIENT)
-    @Override
-    public IIcon getIcon(int i, int j)
-	{
-    	return this.blockIcon;
-	}
-    
-    @Override
-    public void registerBlockIcons(IIconRegister iconRegister)
-    {
-    	this.blockIcon = iconRegister.registerIcon(Constants.TCC_MODID + ":" + Constants.KEY_STRAW);
-    }*/
 
-    /**
-     * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
-     * cleared to be reused)
-     */
-	/*
-    @Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
-    {
-    	return null;
-    }
-*/
+	@Override
+	public ModelResourceLocation getDefaultModelLocation() {
+		return modelResourceLocation;
+	}
+
     /**
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.

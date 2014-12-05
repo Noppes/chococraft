@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "normal": { "model": "chococraft:gysahlStem0" },
+        "stage=0": { "model": "chococraft:gysahlStem0" },
+        "stage=1": { "model": "chococraft:gysahlStem1" },
+        "stage=2": { "model": "chococraft:gysahlStem2" },
+        "stage=3": { "model": "chococraft:gysahlStem3" },
+        "stage=4": { "model": "chococraft:gysahlStem4" }
+    }
+}

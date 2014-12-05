@@ -35,7 +35,7 @@ public class Constants
 	public static String KEY_DISGUISE_LEGS  = "disguiseLegs";
 	public static String KEY_DISGUISE_BOOTS = "disguiseBoots";
 	public static String KEY_EGG_PURPLE     = "eggPurple";
-	public static String KEY_FEATHER        = "chocoboFeather";
+	public static String KEY_FEATHER        = "Chocobo_Feather";
 	public static String KEY_GY_CAKE        = "gysahl_cake";
 	public static String KEY_GY_PICKLES     = "gysahl_pickles";
 	public static String KEY_GY_PICKLES_RAW = "gysahl_rawpickles";
