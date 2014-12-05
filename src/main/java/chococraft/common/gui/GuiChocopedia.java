@@ -96,7 +96,7 @@ public class GuiChocopedia extends GuiScreen
 	@SuppressWarnings("unchecked")
 	public void initGui()
 	{		
-		if(null != this.chocobo)
+		if(null != this.chocobo && this.chocobo.getOwner() != null)//TODO 1.8 make getOwner into something that returns the owner string instead of the id for gui's
 		{
 			// Chocobo options view			
 			//StringTranslate stringtranslate = StringTranslate.getInstance();
@@ -253,7 +253,7 @@ public class GuiChocopedia extends GuiScreen
 	@Override
 	public void drawScreen(int i, int j, float f)
 	{
-		if(null != this.chocobo)
+		if(null != this.chocobo && this.chocobo.getOwner() != null)//TODO 1.8 should be fetching owner name instead
 		{
 			drawDefaultBackground();
 			@SuppressWarnings("UnusedAssignment")

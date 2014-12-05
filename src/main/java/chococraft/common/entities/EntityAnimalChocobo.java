@@ -413,41 +413,43 @@ public abstract class EntityAnimalChocobo extends EntityTameable implements IEnt
 		
 		this.showAmountHeartsOrSmokeFx(this.isFollowing(), 7);
 	}
-	
+
 	@Override
 	public EntityPlayer getOwner()
-    {
-		if(1 == 1)
-			return null;//FIXME - 1.8
-		try {
-			EntityPlayer owner = this.worldObj.getPlayerEntityByUUID(UUID.fromString(this.getOwnerId()));//getOwnerName
-			if (null == owner) {
-
-				if (this.worldObj.playerEntities.size() == 1) {
-					if (this.getOwner().getName().equals("Player"))//getOwnerName
+	{
+		System.out.println(this.getOwnerId());
+		EntityPlayer owner = this.worldObj.getPlayerEntityByName(this.getOwnerId());//getOwnerName
+		if(null == owner)
+		{
+			if(this.worldObj.playerEntities.size() == 1)
+			{
+				if(this.getOwnerId().equals("Player"))//getOwnerName
+				{
+					Object playerObj = this.worldObj.playerEntities.get(0);
+					if(playerObj instanceof EntityPlayer)
 					{
-						Object playerObj = this.worldObj.playerEntities.get(0);
-						if (playerObj instanceof EntityPlayer) {
-							EntityPlayer updatedOwner = (EntityPlayer) playerObj;
-							this.setOwnerId(updatedOwner.getUniqueID().toString());//setOwner
-							owner = updatedOwner;
-						}
-					} else {
-						Object playerObj = this.worldObj.playerEntities.get(0);
-						if (playerObj instanceof EntityPlayer) {
-							EntityPlayer offlinePlayer = (EntityPlayer) playerObj;
-							if (offlinePlayer.getDisplayName().equals("Player")) {
-								owner = offlinePlayer;
-							}
+						EntityPlayer updatedOwner = (EntityPlayer)playerObj;
+						this.setOwnerId(updatedOwner.getDisplayName().getUnformattedText());//setOwner
+						owner = updatedOwner;
+					}
+				}
+				else
+				{
+					Object playerObj = this.worldObj.playerEntities.get(0);
+					if(playerObj instanceof EntityPlayer)
+					{
+						EntityPlayer offlinePlayer = (EntityPlayer)playerObj;
+						if(offlinePlayer.getDisplayName().equals("Player"))
+						{
+							owner = offlinePlayer;
 						}
 					}
 				}
 			}
-			return owner;
-		} catch(Exception e) {//TODO fix
-			return null;
 		}
-    }
+		return owner;
+	}
+
 	
 	public boolean isOwner(EntityPlayer player)
 	{
@@ -475,7 +477,7 @@ public abstract class EntityAnimalChocobo extends EntityTameable implements IEnt
 					int d100 = this.rand.nextInt(100);
 					if(d100 < ModChocoCraft.penHealProbability)
 					{
-						Block blockBelow = this.worldObj.getBlockState(new BlockPos(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.getBoundingBox().minY), MathHelper.floor_double(this.posZ))).getBlock();
+						Block blockBelow = this.worldObj.getBlockState(new BlockPos(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.getEntityBoundingBox().minY), MathHelper.floor_double(this.posZ))).getBlock();
 						if(blockBelow.equals(ChocoCraftBlocks.strawBlock))
 						{
 							int range = ModChocoCraft.penHealCauldronRange;
@@ -740,7 +742,7 @@ public abstract class EntityAnimalChocobo extends EntityTameable implements IEnt
         
         if (this.isInLove())
         {
-            List list = this.worldObj.getEntitiesWithinAABB(EntityChocobo.class, this.getBoundingBox().expand(8F, 8F, 8F));
+            List list = this.worldObj.getEntitiesWithinAABB(EntityChocobo.class, this.getEntityBoundingBox().expand(8F, 8F, 8F));
 			for (Object aList : list) {
 				EntityChocobo otherChoco = (EntityChocobo) aList;
 
@@ -769,7 +771,7 @@ public abstract class EntityAnimalChocobo extends EntityTameable implements IEnt
     public boolean getCanSpawnHere()
     {
         int x = MathHelper.floor_double(this.posX);
-        int y = MathHelper.floor_double(this.getBoundingBox().minY);
+        int y = MathHelper.floor_double(this.getEntityBoundingBox().minY);
         int z = MathHelper.floor_double(this.posZ);
 		boolean isPosPathWeight = func_180484_a(this.getPosition()) > 0.0F;//getBlockPathWeight
         return  isPosPathWeight && super.getCanSpawnHere();
@@ -787,7 +789,7 @@ public abstract class EntityAnimalChocobo extends EntityTameable implements IEnt
     	{
     		int ownerPosX = MathHelper.floor_double(this.getOwner().posX) - 2;
     		int ownerPosZ = MathHelper.floor_double(this.getOwner().posZ) - 2;
-    		int ownerPosY = MathHelper.floor_double(this.getOwner().getBoundingBox().minY);
+    		int ownerPosY = MathHelper.floor_double(this.getOwner().getEntityBoundingBox().minY);
 
     		for (int xOffset = 0; xOffset <= 4; ++xOffset)
     		{
@@ -925,7 +927,7 @@ public abstract class EntityAnimalChocobo extends EntityTameable implements IEnt
 		if (pathentity == null && distance > 12F)
 		{
 			int entityPosX = MathHelper.floor_double(entity.posX) - 2;
-			int entityPosY = MathHelper.floor_double(entity.getBoundingBox().minY);
+			int entityPosY = MathHelper.floor_double(entity.getEntityBoundingBox().minY);
 			int entityPosZ = MathHelper.floor_double(entity.posZ) - 2;
 			for (int i = 0; i <= 4; i++)
 			{
@@ -1041,7 +1043,7 @@ public abstract class EntityAnimalChocobo extends EntityTameable implements IEnt
         }
         
         
-        int i = MathHelper.floor_double(getBoundingBox().minY + 0.5D);
+        int i = MathHelper.floor_double(getEntityBoundingBox().minY + 0.5D);
         this.rotationPitch = 0.0F;
         
         if (this.pathToEntity == null || this.rand.nextInt(100) == 0)
@@ -1129,7 +1131,7 @@ public abstract class EntityAnimalChocobo extends EntityTameable implements IEnt
     {
 		EntityPlayer nearestPlayer = null;
 		double distance = 9999;
-		List<EntityPlayer> players = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, getBoundingBox().expand(8F, 8F, 8F));
+		List<EntityPlayer> players = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, getEntityBoundingBox().expand(8F, 8F, 8F));
 		for(EntityPlayer player : players) {
 			double tmpDistance = this.getDistanceToEntity(player);
 			if(tmpDistance < distance) {

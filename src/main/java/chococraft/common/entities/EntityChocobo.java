@@ -498,7 +498,7 @@ public abstract class EntityChocobo extends EntityChocoboRideable
 					motionZ = motionZ * d1;
 				}
 				@SuppressWarnings("rawtypes")
-				List list = worldObj.getEntitiesWithinAABBExcludingEntity(this.riddenByEntity, getBoundingBox().expand(1.0D, 1.0D, 1.0D));
+				List list = worldObj.getEntitiesWithinAABBExcludingEntity(this.riddenByEntity, getEntityBoundingBox().expand(1.0D, 1.0D, 1.0D));
 				if (list != null)
 				{
 					for (Object aList : list) {
