@@ -56,7 +56,7 @@ public class BlockGysahlStem extends BlockBush implements ISimpleTextureHelper
         this.setStepSound(soundTypeGrass);
 		setHardness(0f);
 		setUnlocalizedName("gysahlStemBlock");
-		defaultModelLocation = new ModelResourceLocation(Constants.TCC_MODID + ":" + "gyshal_stem01", "inventory");
+		defaultModelLocation = new ModelResourceLocation(Constants.TCC_MODID + ":" + "gyshalStemBlock", "inventory");
 		this.setDefaultState(this.blockState.getBaseState().withProperty(STAGE, Integer.valueOf(0)));
 	}
 
