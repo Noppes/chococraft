@@ -3,8 +3,8 @@
         "straw": "chococraft:blocks/chocoboStraw"
     },
     "elements": [
-        {   "from": [0, 0, 0],
-            "to": [16, 2, 16],
+        {   "from": [0, 8, 0],
+            "to": [16, 10, 16],
             "faces": {
                 "down":  { "uv": [ 0,  0, 16, 16 ], "texture": "#straw", "cullface": "down" },
                 "up":    { "uv": [ 0,  0, 16, 16 ], "texture": "#straw" },

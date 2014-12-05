@@ -53,7 +53,11 @@ public class CommonProxyChocoCraft
 		return null;
 	}
 
-	public void registerItemTexture(final Item item) {}
+	public void registerItemTexture(final Item item, final String itemName) {}
 
-	public void registerBlockTexture(final Block block) {}
+	public void registerBlockTexture(final Block block, final String blockName) {}
+
+    public void registerItemTexture(final Item item, final String itemName, int meta) {}
+
+    public void registerBlockTexture(final Block block, final String blockName, int meta) {}
 }

@@ -1,8 +1,5 @@
 {
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "chococraft:blocks/chocoboStraw"
-    },
+    "parent": "chococraft:block/strawBlock_inventory",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

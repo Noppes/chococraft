@@ -1,6 +1,6 @@
 {
     "parent": "chococraft:item/choco_item",
     "textures": {
-        "layer0": "chococraft:items/chocoboFeather"
+        "layer0": "chococraft:items/gysahl_loverly"
     }
 }

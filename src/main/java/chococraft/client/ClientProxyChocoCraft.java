@@ -18,7 +18,6 @@ import chococraft.common.ModChocoCraft;
 import chococraft.common.config.ChocoCraftBlocks;
 import chococraft.common.config.ChocoCraftItems;
 import chococraft.common.config.Constants;
-import chococraft.common.items.helper.ISimpleTextureHelper;
 import chococraft.common.proxy.CommonProxyChocoCraft;
 import chococraft.common.entities.EntityChicobo;
 import chococraft.common.entities.EntityChocoboRideable;
@@ -33,17 +32,12 @@ import chococraft.common.network.serverSide.ChocoboUpdateRiderActionState;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.FMLLog;
 
 public class ClientProxyChocoCraft extends CommonProxyChocoCraft
 {
@@ -67,73 +61,54 @@ public class ClientProxyChocoCraft extends CommonProxyChocoCraft
         RenderingRegistry.registerEntityRenderingHandler(EntityChocoboPurple.class, new RenderChocobo(manager, new ModelChocobo(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityChicobo.class, new RenderChicobo(manager, new ModelChicobo(), 0.5F));
 
-		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.chocopediaItem);
-		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.chocoboFeatherItem);
-		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.chocoboSaddleItem);
-		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.gysahlPicklesItem);
-		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.gysahlPicklesRawItem);
-		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.chocoboLegCookedItem);
-		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.chocoboLegRawItem);
-		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.chocoDisguiseBootsItem);
-		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.chocoDisguiseLegsItem);
-		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.chocoDisguisePlateItem);
-		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.chocoDisguiseHelmetItem);
-		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.purpleChocoboEggItem);
-		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.chocoboWhistleItem);
-		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.gysahlCakeItem);
-		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.gysahlRedItem);
-		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.gysahlPinkItem);
-		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.gysahlGoldenItem);
-		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.gysahlLoverlyItem);
-		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.gysahlSeedsItem);
-		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.chocoboSaddleBagsItem);
-		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.chocoboPackBagsItem);
+		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.chocopediaItem, "Chocopedia");
+		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.chocoboFeatherItem, "Chocobo_Feather");
+		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.chocoboSaddleItem, "Chocobo_Saddle");
+		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.gysahlPicklesItem, "Gysahl_Pickles");
+		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.gysahlPicklesRawItem, "Gysahl_Raw_Pickles");
+		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.chocoboLegCookedItem, "Cooked_Chocobo_Leg");
+		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.chocoboLegRawItem, "Raw_Chocobo_Leg");
+		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.chocoDisguiseBootsItem, "Chocodisguise_Boots");
+		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.chocoDisguiseLegsItem, "Chocodisguise_Legs");
+		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.chocoDisguisePlateItem, "Chocodisguise_Body");
+		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.chocoDisguiseHelmetItem, "Chocodisguise_Helmet");
+		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.purpleChocoboEggItem, "Purple_Chocobo_Egg");
+		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.chocoboWhistleItem, "Chocobo_Whistle");
+		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.gysahlCakeItem, "Gysahl Cake");
+		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.gysahlRedItem, "Red_Gysahl");
+		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.gysahlPinkItem, "Pink_Gysahl");
+		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.gysahlGoldenItem, "Golden_Gysahl");
+		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.gysahlLoverlyItem, "Loverly_Gysahl");
+		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.gysahlSeedsItem, "Gysahl_Seeds");
+		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.chocoboSaddleBagsItem, "Chocobo_Saddle_Bags");
+		ModChocoCraft.proxy.registerItemTexture(ChocoCraftItems.chocoboPackBagsItem, "Chocobo_Pack_Bags");
 
-		ModChocoCraft.proxy.registerBlockTexture(ChocoCraftBlocks.gysahlGreenBlock);
-		ModChocoCraft.proxy.registerBlockTexture(ChocoCraftBlocks.gysahlStemBlock);
-		ModChocoCraft.proxy.registerBlockTexture(ChocoCraftBlocks.strawBlock);
+		ModChocoCraft.proxy.registerBlockTexture(ChocoCraftBlocks.gysahlGreenBlock, "gysahlGreenBlock");
+		ModChocoCraft.proxy.registerBlockTexture(ChocoCraftBlocks.gysahlStemBlock, "gysahlStemBlock");
+		ModChocoCraft.proxy.registerBlockTexture(ChocoCraftBlocks.strawBlock, "strawBlock");
+    }
+
+    @Override
+    public void registerBlockTexture(final Block block, final String blockName) {
+        registerBlockTexture(block, blockName, 0);
+    }
+
+    @Override
+    public void registerBlockTexture(final Block block, final String blockName, int meta) {
+        RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
+        renderItem.getItemModelMesher().register(Item.getItemFromBlock(block), meta, new ModelResourceLocation(Constants.TCC_MODID + ":" + blockName,"inventory"));
     }
 
 	@Override
-	public void registerBlockTexture(final Block block) {
-		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-		if(renderItem == null)
-			return;
-
-		if(!(block instanceof ISimpleTextureHelper))
-		{
-			FMLLog.severe("Block "+block.getClass().getName()+" does not extend ISimpleTextureHelper");
-			return;
-		}
-
-		Item blockItem = Item.getItemFromBlock(block);
-		renderItem.getItemModelMesher().register(blockItem, new ItemMeshDefinition() {
-			@Override
-			public ModelResourceLocation getModelLocation(ItemStack stack) {
-				return ((ISimpleTextureHelper)block).getDefaultModelLocation();
-			}
-		});
+	public void registerItemTexture(final Item item, final String itemName) {
+		registerItemTexture(item, itemName, 0);
 	}
 
-	@Override
-	public void registerItemTexture(final Item item) {
-		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-		if(renderItem == null)
-			return;
-
-		if(!(item instanceof ISimpleTextureHelper))
-		{
-			FMLLog.severe("Block "+item.getClass().getName()+" does not extend ISimpleTextureHelper");
-			return;
-		}
-
-		renderItem.getItemModelMesher().register(item, new ItemMeshDefinition() {
-			public ModelResourceLocation getModelLocation(ItemStack stack)
-			{
-				return ((ISimpleTextureHelper)item).getDefaultModelLocation();
-			}
-		});
-	}
+    @Override
+    public void registerItemTexture(final Item item, final String itemName, int meta) {
+        RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
+        renderItem.getItemModelMesher().register(item, meta, new ModelResourceLocation(Constants.TCC_MODID + ":" + itemName,"inventory"));
+    }
     
     @Override
     public int addArmor(String armor)
